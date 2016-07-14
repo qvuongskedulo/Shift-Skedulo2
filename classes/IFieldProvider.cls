@@ -1,0 +1,1 @@
+global interface IFieldProvider { Object getValue(); }

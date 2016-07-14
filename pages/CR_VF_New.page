@@ -1,0 +1,83 @@
+<apex:page standardController="Condition_Report__c">
+	<apex:sectionHeader title="{!$ObjectType.Condition_Report__c.label} Edit" subtitle="New {!$ObjectType.Condition_Report__c.name}"/>
+	<apex:form >
+	<apex:pageBlock title="{!$ObjectType.Condition_Report__c.label} Edit" mode="edit">
+		<apex:pageBlockButtons >
+			<apex:commandButton action="{!save}" value="Save"/>
+			<apex:commandButton action="{!cancel}" value="Cancel"/>
+		</apex:pageBlockButtons>
+		<apex:pageBlockSection showHeader="true" title="Basic Information" columns="2">
+			<apex:pageBlockSectionItem />
+			<apex:inputField required="true" value="{!Condition_Report__c.Base_Deal_ID__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Summary__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Car_ID__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Engine" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Engine_Description__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Engine_Additional_Info__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Engine_Definitions__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Brakes &amp; Tires" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Brakes_Tires_Description__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Brakes_Tired_Definitions_to_Include__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Brakes_Tires_Additional_Info__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Tire_Percentage__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Brake_Pads__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Underbody" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Underbody_Description__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Underbody_Definitions_to_Include__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Underbody_Additional_Info__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Road Test" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Road_Test_Description__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Road_Test_Definitions_to_Include__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Road_Test_Additional_Info__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Extra Information" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Additional_Info__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Additoinal_Accidents__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Additional_Service_Records__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Shift_Repairs__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Wear_and_Tear_Shots__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Approvals" columns="2">
+			<apex:inputField value="{!Condition_Report__c.Ready_for_Review__c}"/>
+			<apex:pageBlockSectionItem />
+			<apex:inputField value="{!Condition_Report__c.Approved__c}"/>
+			<apex:pageBlockSectionItem />
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="Information" columns="2">
+			<apex:pageBlockSectionItem />
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Condition Report Owner"/>
+				<apex:outputText value="{!Condition_Report__c.Owner.Name}"/>
+			</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+		<apex:pageBlockSection showHeader="true" title="System Information" columns="2">
+		</apex:pageBlockSection>
+	</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,125 @@
+<apex:component controller="ShiftCxCarSearchController">
+
+    <apex:attribute name="focus" type="Boolean" default="false"
+                    description="Whether to automatically move the focus to the search box when the component is displayed." />
+
+    <apex:form id="form">
+
+        <apex:selectCheckboxes value="{!selectedStages}" onchange="scheduleSearch();">
+            <apex:selectOptions value="{!allStages}"/>
+        </apex:selectCheckboxes>
+
+        <apex:inputText id="searchBox" onkeypress="return cancelEnter(event);"/>
+        &nbsp;
+        <apex:actionStatus id="searchStatus" startText="(searching...)" stopText=""/>
+
+        <br/>
+        <br/>
+
+        <apex:actionFunction name="search" action="{!search}" status="searchStatus" reRender="searchResult" onbeforedomupdate="searchResponseReceived();">
+            <apex:param name="param1" assignTo="{!searchQuery}" value=""/>
+        </apex:actionFunction>
+
+        <apex:outputPanel id="searchResult" layout="block">
+
+            <apex:outputPanel rendered="{!errorMessage != null && errorMessage != ''}">
+                Error: <pre><apex:outputText value="{!HTMLENCODE(errorMessage)}"/></pre>
+            </apex:outputPanel>
+
+            <apex:outputPanel >
+
+                <apex:repeat var="stage" value="{!selectedStages}">
+
+                    <apex:pageBlock title="{!HTMLENCODE(stage)}: {!searchResult.carCountInStage[stage]} results">
+                        <apex:pageBlockTable var="row" value="{!searchResult.carsInStage[stage]}">
+
+                            <apex:column ><apex:facet name="header">Vehicle</apex:facet><apex:outputLink value="/{!HTMLENCODE(row.Id)}">{!HTMLENCODE(row.Name)}</apex:outputLink></apex:column>
+                            <apex:column ><apex:facet name="header">Color</apex:facet><apex:outputText value="{!HTMLENCODE(row.Exterior_Color__c)}{!IF(row.Exterior_Color__c!="" && row.Interior_Color__c!=""," on "+HTMLENCODE(row.Interior_Color__c),"")}"/></apex:column>
+                            <apex:column ><apex:facet name="header">Body style</apex:facet><apex:outputText value="{!HTMLENCODE(row.Body_Style__c)}"/></apex:column>
+                            <apex:column ><apex:facet name="header">Mileage</apex:facet><apex:outputText value="{!row.Mileage__c}"/></apex:column>
+                            <apex:column ><apex:facet name="header">List Price</apex:facet><apex:outputText value="{!row.List_Price__c}"/></apex:column>
+                            <apex:column ><apex:facet name="header">Listing Region</apex:facet><apex:outputText value="{!HTMLENCODE(row.Listing_Region_Name__c)}"/></apex:column>
+                            <apex:column ><apex:facet name="header">Status</apex:facet><apex:outputText value="{!IF(row.Coming_Soon__c,"Coming Soon","")} {!IF(row.Sale_Pending__c,"Sale Pending","")}"/></apex:column>
+
+                        </apex:pageBlockTable>
+                    </apex:pageBlock>
+
+                </apex:repeat>
+
+            </apex:outputPanel>
+
+        </apex:outputPanel>
+    </apex:form>
+
+    <script>
+     // TODO(ohler): figure out what happens when multiple components
+     // have JS functions or variables with the same names.  It's
+     // OK if including more than one ShiftCxCarSearch on
+     // the same page doesn't work, but these globals could clash with
+     // other components, which is more problematic.
+
+     var searchBox;
+
+     // possible states:
+     // - quiescent (!requestPending)
+     // - waiting for response (requestPending && !pendingRequestObsolete)
+     // - waiting for response, but search criteria have been modified since, so need to send another request once it returns
+     //   (requestPending && pendingRequestObsolete)
+
+     var requestPending = false;
+     // meaningless if requestPending is false.
+     var pendingRequestObsolete = false;
+     function doSearch() {
+         if (requestPending) {
+             return;
+         }
+         search(searchBox.value);
+         requestPending = true;
+         pendingRequestObsolete = false;
+     }
+
+     // possible states:
+     // - quiescent (timeout == null)
+     // - waiting to mark pendingRequestObsolete and call doSearch (timeout != null)
+     var timeout = null;
+     function scheduleSearch() {
+         if (timeout) {
+             clearTimeout(timeout);
+         }
+         scheduled = setTimeout(function() {
+             timeout = null;
+             pendingRequestObsolete = true;
+             doSearch();
+         }, 100);
+     }
+
+     function searchResponseReceived() {
+         requestPending = false;
+         if (pendingRequestObsolete) {
+             scheduleSearch();
+         }
+     }
+
+     document.addEventListener('DOMContentLoaded', function() {
+         searchBox = document.getElementById('{!$Component.form.searchBox}');
+         searchBox.addEventListener('input', scheduleSearch);
+         if ({!focus}) {
+             searchBox.focus();
+         }
+
+         // to handle the case of browser prefilling the box (in Chrome, can
+         // test by searching something, clicking on a match to go to that vehicle,
+         // then clicking "back" to go back to this search page)
+         scheduleSearch();
+     });
+
+     function cancelEnter(event) {
+         if (event.keyCode == 13) {
+             console.log("cancelEnter");
+             event.stopPropagation();
+             return false;
+         }
+     }
+    </script>
+
+</apex:component>

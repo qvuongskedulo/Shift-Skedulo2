@@ -1,0 +1,166 @@
+<apex:component access="global" controller="skedBookingEmailController">
+    
+    <apex:attribute name="appointmentId" assignTo="{!JobId}" description="" type="String" />
+    
+    <body leftmargin="0" rightmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    <center>
+      <table width="100%" border="0" style="background-color: #414141; border-bottom: 1px solid #EEEEEE;" cellpadding="0" cellmargin="0">
+        <tr>
+          <td align="center">
+            <table width="100%" border="0" cellpadding="0">
+              <tr>
+                <td align="left" class="header">
+                  <a href="http://shift.com" style="color: #ffffff; text-decoration: none;"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/1bb3c20d-3dca-48a7-b3b2-c94e635e7c7e.png" width="80px" /></a>
+                </td>
+                <td align="right" class="url" style="padding-right: 15px;">
+                  <a href="http://shift.com" style="color: #ffffff; text-decoration: none;">SHIFT.COM</a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+      
+      <!-- Day, Address, CC Confirmation -->
+      
+      <table border="0" cellspacing="0" width="100%" style="background-color: #fafafa;">
+        <tbody>
+          <tr>
+            <td colspan="3" style="background-color: #fafafa;">
+              <table border="0" cellspacing="0" width="100%">
+                <tr>
+                  <td></td>
+                  <td width="450" align="center" style="text-align:center; padding:30px 0px;">Hi {!SellerFirstName}, We’re sorry to hear there’s an issue with the <strong>{!VehicleName}</strong>. We'll come pick up the car at the time and location below:
+                 
+                  </td><td></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+           
+          <tr>
+            <td colspan="3">
+              <table width="100%" border="0">
+                <tr>
+                  <td></td>
+                  <td width="330">
+                    <table width="100%" border="0">
+                      <tr>
+                        <td>
+                          <table width="100%" cellspacing="0" border="0" style="border: 1px solid #ececec; border-radius:5px; background-color: #fff;">
+                            <tr>
+                              <td>
+                              
+                                <table width="100%" border="0">
+                             <tr valign="center" align="center" style="padding-top:15px;">
+                             <br />
+                            
+                             
+                             </tr>
+                                  <tr>
+                                  <td></td>
+<td width="30%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/3ca994f0-b61f-4132-b7fa-293484a35d3d.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;" />
+</td>
+<td style="color: #424242; padding:20px 0;" valign="center">
+<strong>{!AppointmentDate}</strong><br />
+{!AppointmentTime}
+
+</td>
+</tr>
+                                    <tr>
+                                  <td></td>
+<td width="30%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/b97bf1fd-4a3e-49b2-ad40-1bec27e7f312.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;" />
+</td>
+<td style="color: #424242; padding:0;" valign="center">
+{!LocationAddress}
+
+</td>
+</tr>
+
+                                    <tr>
+                                  <td></td>
+<td width="30%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/b8a35a60-5771-4a3f-ac0c-b82701dafdf0.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;" />
+</td>
+<td style="color: #424242; padding:30px 0;" valign="center">Your Car Enthusiast:<br />
+  <strong>{!ResourceName}</strong>
+  <br />
+  {!ResourcePhone}
+</td>
+</tr>
+                                  <tr>
+                                    
+                                  </tr>
+                            </table>
+                            
+                              </td>
+                            </tr>
+                          </table>
+                         
+                                                 
+                        </td>
+                      </tr>
+                    </table>
+                    
+
+                  </td>
+                  <td></td>
+                </tr>
+                
+              </table>
+              <center><p class="explain" style="width:330px;">If you have any questions, feel free to reach out to your Car Enthusiast, {!ResourceName}, at <strong>{!ResourceEmail}</strong>. If you would like to reschedule this pick up, please “reply all” to this email.
+                            </p></center>
+                            <br />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <table border="0" cellspacing="0" width="100%">
+                <tr>
+                  <td></td>
+                  <td>
+                                    </td>
+                  <td></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+      
+     
+      
+    
+
+      <table width="100%" border="0" cellpadding="30" style="background-color: #414141;">
+        <tr>
+          <td align="center">
+            <table width="100%" border="0" cellpadding="0" style="margin: 0px 5px 40px 5px;">
+              <tr>
+                <td align="center" width="25%"><a href="https://shift.com/yelp-redirect?utm_source=financing_options&utm_medium=email&utm_campaign=financing" target="_blank"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/074fe46b-4dc7-42e6-b60e-7380a2865e12.png" class="botimages_yelp" /></a></td>
+                <td align="center" width="25%"><a href="tel:+18557443801"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/84b1356e-4657-4a58-a7df-44773bc3527b.png" class="botimages" /></a></td>
+                <td align="center" width="25%"><a href="mailto:buy@shift.com"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/dce34180-205e-4e5e-a321-39a109a46da4.png" class="botimages" /></a></td>
+                <td align="center" width="25%"><a href="https://shift.com/facebook-redirect?utm_source=financing_options&utm_medium=email&utm_campaign=financing" target="_blank"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/886d8795-9051-47b2-94d6-d45aa261c28e.png" class="botimages" /></a></td>
+              </tr>
+              <tr>
+                <td colspan="4" align="center">
+                  <a href="http://shift.com"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/1bb3c20d-3dca-48a7-b3b2-c94e635e7c7e.png" width="90px" class="botlogo" /></a>
+                  <p style="color: white;" class="address"> 2500 Market St.  |  San Francisco, CA 94618 </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </center>
+  </body>
+    
+</apex:component>

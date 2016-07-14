@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Canceled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Canceled</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Departs_At__c</fullName>
+        <externalId>false</externalId>
+        <label>Departs At</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Evaluation_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Evaluation</label>
+        <referenceTo>Evaluation__c</referenceTo>
+        <relationshipLabel>Pick Ups</relationshipLabel>
+        <relationshipName>Pick_Ups</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GeoLocation__c</fullName>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>GeoLocation</label>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Original_Time_Requested__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Time Requested</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Pick_Up_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Pick Up By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Pick_Ups</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Return_Payment_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>Return Payment Details</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Scheduled By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Pick_Ups2</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_For_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>Scheduled_For__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scheduled For (Date/Time)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_For__c</fullName>
+        <externalId>false</externalId>
+        <label>Scheduled For</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Backflow</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Return</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Seller</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Vehicle_Interest_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Vehicle Interest</label>
+        <referenceTo>Vehicle_Interest__c</referenceTo>
+        <relationshipLabel>Pick Ups</relationshipLabel>
+        <relationshipName>Pick_Ups</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Pick Up</label>
+    <nameField>
+        <displayFormat>{00000}</displayFormat>
+        <label>Pick Up Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Pick Ups</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Buyer</fullName>
+        <active>true</active>
+        <label>Buyer</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Backflow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Return</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seller</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Seller</fullName>
+        <active>true</active>
+        <label>Seller</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Backflow</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Return</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Seller</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <webLinks>
+        <fullName>Reschedule</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reschedule</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+var jobResult = sforce.connection.query(&quot;SELECT Id, sked__Job_Status__c FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Pick_Up__c = &apos;{!Pick_Up__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length == 0) {
+alert(&apos;This pick up has not been scheduled yet.&apos;);
+}
+else {
+
+var hasCompletedJob = false;
+for (var i = 0; i &lt; jobRecords.length; i++) {
+if (jobRecords[i].sked__Job_Status__c == &apos;Complete&apos; || jobRecords[i].sked__Job_Status__c == &apos;In Progress&apos;) {
+hasCompletedJob = true;
+}
+}
+
+if (hasCompletedJob) {
+alert(&apos;Cannot reschedule complete/in progress jobs.&apos;);
+}
+else {
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Pick_Up__c.Id}&amp;type=pickup&amp;mode=reschedule &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Schedule_Appointment</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Schedule Appointment</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+
+var jobResult = sforce.connection.query(&quot;SELECT Id FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Pick_Up__c = &apos;{!Pick_Up__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length &gt; 0) {
+    alert(&apos;This Pick Up has been scheduled and cannot be booked for appointment.&apos;);
+}
+else {
+
+
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Pick_Up__c.Id}&amp;type=pickup &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+
+}</url>
+    </webLinks>
+</CustomObject>

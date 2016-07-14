@@ -1,0 +1,375 @@
+<apex:component access="global">
+    <style type="text/css">
+        #outlook a{
+        padding:0;
+        }
+        body{
+        width:100% !important;
+        }
+        body{
+        -webkit-text-size-adjust:none;
+        }
+        body{
+        margin:0;
+        padding:0;
+        font-family:Helvetica, Arial, sans-serif;
+        font-size:14px;
+        line-height:22px;
+        color:#414141;
+        }
+        img{
+        border:none;
+        font-size:14px;
+        font-weight:bold;
+        height:auto;
+        line-height:100%;
+        outline:none;
+        text-decoration:none;
+        text-transform:capitalize;
+        }
+        #backgroundTable{
+        height:100% !important;
+        margin:0;
+        padding:0;
+        width:100% !important;
+        }
+        h1,.h1{
+        /*@editable*/color:#202020;
+        display:block;
+        /*@editable*/font-family:Helvetica, Arial, sans-serif;
+        /*@editable*/font-size:34px;
+        /*@editable*/font-weight:bold;
+        /*@editable*/line-height:100%;
+        margin-bottom:10px;
+        /*@editable*/text-align:left;
+        }
+        hr{
+        border:1px solid #EEEEEE;
+        }
+        a{
+        text-decoration:none;
+        color:#424242;
+        }
+        .button2{
+        width:200px;
+        background:#e14e4e;
+        border:0;
+        padding:10px 30px;
+        font-size:14px;
+        font-weight:500;
+        border-radius:5px;
+        -webkit-font-smoothing:antialiased;
+        cursor:pointer;
+        color:#fff;
+        text-decoration:none;
+        display:block;
+        text-align:center;
+        }
+        .button{
+        background:#e14e4e;
+        border:0;
+        padding:10px 30px;
+        font-size:14px;
+        font-weight:500;
+        border-radius:5px;
+        -webkit-font-smoothing:antialiased;
+        cursor:pointer;
+        color:#fff;
+        text-decoration:none;
+        display:block;
+        text-align:center;
+        }
+        /*
+        @tab Page
+        @section heading 2
+        @tip Set the styling for all second-level headings in your emails.
+        @theme heading2
+        */
+        h2,.h2{
+        /*@editable*/color:#202020;
+        display:block;
+        /*@editable*/font-family:Helvetica, Arial, sans-serif;
+        /*@editable*/font-size:30px;
+        /*@editable*/font-weight:bold;
+        /*@editable*/line-height:100%;
+        margin-bottom:10px;
+        /*@editable*/text-align:left;
+        }
+        /*
+        @tab Page
+        @section heading 3
+        @tip Set the styling for all third-level headings in your emails.
+        @theme heading3
+        */
+        h3,.h3{
+        /*@editable*/color:#414141;
+        display:block;
+        /*@editable*/font-family:Helvetica, Arial, sans-serif;
+        /*@editable*/font-size:34px;
+        /*@editable*/font-weight:normal;
+        /*@editable*/line-height:100%;
+        }
+        /*
+        @tab Page
+        @section heading 4
+        @tip Set the styling for all fourth-level headings in your emails. These should be the smallest of your headings.
+        @theme heading4
+        */
+        h4,.h4{
+        /*@editable*/color:#202020;
+        display:block;
+        /*@editable*/font-family:Helvetica, Arial, sans-serif;
+        /*@editable*/font-size:17px;
+        /*@editable*/font-weight:bold;
+        /*@editable*/line-height:100%;
+        margin-bottom:20px;
+        margin-top:20px;
+        }
+        /*
+        @tab Header
+        @section preheader style
+        @tip Set the background color for your email's preheader area.
+        @theme page
+        */
+        #templatePreheader{
+        /*@editable*/background-color:#FAFAFA;
+        }
+        /*
+        @editable
+        */
+        text-align:center#monkeyRewards img{
+        /*@editable*/max-width:160px;
+        }
+        .divider{
+        display:block;
+        width:300px;
+        border-style:solid;
+        border-width:1px;
+        border-color:#d2d2d2;
+        }
+        .calloutcontainer{
+        width:100%;
+        background-color:#ffffff;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        border:1px solid #d1d1d1;
+        padding:15px 0 25px 0;
+        margin-bottom:20px;
+        box-shadow:0px 1px 5px #ededed;
+        }
+        .cta-link{
+        text-decoration:none;
+        }
+        .ctabutton{
+        width:150px;
+        background-color:#e14e4e;
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        border:1px solid #eb3037;
+        padding:15px 10px;
+        margin:10% 0 20px 0;
+        color:#ffffff;
+        font-size:14px;
+        text-align:center;
+        text-decoration:none;
+        }
+        .calloutheader{
+        font-size:22px;
+        margin:0px 0 0px 0;
+        }
+        .callout_text{
+        font-size:14px;
+        margin:8px 0 8% 0;
+        color:#424242;
+        }
+        .header{
+        padding:20px 0 20px 17px;
+        }
+        .url{
+        font-size:12px;
+        text-decoration:none;
+        color:#414141;
+        letter-spacing:1px;
+        }
+        .questions{
+        font-size:12px;
+        font-weight:bold;
+        }
+        .contacts{
+        font-size:18px;
+        }
+        .boturl{
+        color:#ffffff;
+        font-size:12px;
+        margin-bottom:25px;
+        padding:0 10px 3px 0px;
+        }
+        .botlogo{
+        margin-top:40px;
+        }
+        .botimages{
+        width:20px;
+        margin-bottom:25px;
+        }
+        .botimages_yelp{
+        width:42px;
+        margin-bottom:25px;
+        }
+        .bot_message{
+        color:#9b9b9b;
+        font-weight:normal;
+        padding-top:20px;
+        }
+        .nextimages{
+        width:28px;
+        padding-top:2px;
+        }
+        .accenticon{
+        padding-bottom:15px;
+        z-index:2;
+        }
+        .rule{
+        padding-bottom:25px;
+        }
+        .explain{
+        padding-top:20px;
+        width:450px;
+        }
+        @media screen and (max-width:300px){
+        .intro{
+        font-size:22px !important;
+        line-height:34px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        body{
+        font-family:Arial !important;
+        font-size:25px !important;
+        line-height:37px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        h4{
+        font-size:26px !important;
+        margin-bottom:35px !important;
+        margin-top:35px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        #year{
+        width:100px;
+        background-color:#ffffff;
+        border-radius:3px;
+        -webkit-border-radius:3px;
+        border:1px solid #c6c6c6;
+        padding:3px 5px 2px 5px;
+        margin:0 0px 50px 0;
+        color:#414141;
+        font-size:20px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .carname{
+        font-size:35px !important;
+        margin:6px 0 0 0  !important;
+        font-weight:bold  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .calloutheader{
+        font-size:28px  !important;
+        margin:5px 0 0px 0 !important;
+        font-weight:bold  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .to{
+        font-size:16px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .minimum{
+        font-size:16px  !important;
+        line-height:24px !important;
+        margin:9px 0 10% 0  !important;
+        color:#414141;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .header{
+        padding:45px 0 45px 15px  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .url{
+        font-size:20px  !important;
+        padding:0 15px 0 0  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        #pricebutton{
+        margin:50px 0 30px 0  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .questions{
+        font-size:18px  !important;
+        font-weight:bold  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .contacts{
+        font-size:28px  !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .botlogo{
+        margin-top:50px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .botimages{
+        width:34px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .botimages_yelp{
+        width:70px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .calloutcontainer{
+        margin-top:20px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .ctabutton{
+        font-size:16px !important;
+        width:180px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        #checkoutbutton2{
+        font-size:23px !important;
+        margin:35px 0 50px 0 !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        #pricebutton{
+        font-size:23px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .nextimages{
+        width:34px !important;
+        }
+        
+        }	@media screen and (max-width:300px){
+        .address{
+        font-size:12px !important;
+        color:white !important;
+        }
+        
+        }
+    </style>
+</apex:component>

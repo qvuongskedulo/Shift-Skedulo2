@@ -1,0 +1,324 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="skedBookingGridController" action="{!Cmd_UpdateGeoLocationToRootRecord}">
+    
+    <head>
+        <title>Schedule {! IF(Model.ObjectType == 'testdrive', 'Test Drive', 'Evaluation')}</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.skedLightningBootstrap, 'assets/css/lightning-bootstrap.min.css')}" />
+        <c:skedBookingGridStyle />
+        
+        <style type="text/css">
+            .resource-item-slot-availability.slot-available.long-travel-time:before {
+            background-color: yellow !important;
+            opacity: 0.3;
+            }
+        </style>
+        
+        <!--<style type="text/css">
+            .resource-item-slot-availability.slot-not-available.activity:before {
+            background-color: yellow;
+            opacity: 0.3;
+            }
+            
+            .resource-item-slot-availability.slot-not-available.not-enough:before {
+            background-color: brown;
+            opacity: 0.3;
+            }
+            
+            .resource-item-slot-availability.slot-not-available.vehicle:before {
+            background-color: blue;
+            opacity: 0.3;
+            }
+        </style>-->
+        <style type="text/css"> 
+            .resource-item-slot-availability.slot-not-available.travel-time:before {
+            background-color: #E9967A;
+            opacity: 0.3;
+            }
+        </style>
+        
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"/>
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/>
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"/>
+        <apex:includeScript value="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.4.1/moment-timezone-with-data-2010-2020.min.js" />
+        <apex:includeScript value="{!URLFOR($Resource.skedLightningBootstrap, 'assets/js/bootstrap.min.js')}" />
+        <apex:includeScript value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCg3QLlaLr6ICaRZLn7_dyFAdv4Zw244PA&signed_in=true&libraries=places"/>
+        <apex:includeScript value="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"/>
+        <c:skedBookingGridScript />
+        <script type="text/javascript">
+        function remote_getDriversAssist(regionTimezone, subRegionId, dateString, startTime, duration, callback) {
+            Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.skedBookingGridController.GetDriversAssist}', regionTimezone, subRegionId, dateString, startTime, duration, callback);
+        }
+        </script>
+    </head>
+    
+    <body>
+        <apex:form id="mainForm">
+            <c:Site_AjaxLoading />
+            
+            <script type="text/javascript">
+            parent_domain = '{!JSENCODE($CurrentPage.parameters.parent_domain)}';
+            rootRecordId = '{!Model.ObjectId}'; 
+            regionTimezone = '{!Model.TimezoneSidId}';
+            
+            minDate = '<apex:outputText value="{0, date, MM/dd/yy}"><apex:param value="{!Model.MinDate}" /></apex:outputText>';
+            selectedDate = '<apex:outputText value="{0, date, MM/dd/yy}"><apex:param value="{!Model.SelectedDate}" /></apex:outputText>';
+            $(document).ready(function() {
+                onDocumentReady();
+            });
+            </script>
+            
+            <apex:actionFunction name="onJobTypeChanged" action="{!Cmd_JobTypeChanged}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="selectedJobType" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onRegionChanged" action="{!Cmd_RegionChanged}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="selectedRegion" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onDurationChanged" action="{!Cmd_DurationChanged}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="duration" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onDriversAssistChanged" action="{!Cmd_DriversAssistChanged}" status="overlayStatus" reRender="mainForm">
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onLocationAddressChanged" action="{!Cmd_LocationAddressChanged}" status="overlayStatus" reRender="mainForm">
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onSelectedDateChanged" action="{!Cmd_SelectedDateChanged}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="selectedDate" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onLoadDriversAssist" oncomplete="onLoadDriversAssistCompleted();" action="{!Cmd_LoadDriversAssist}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="jobStartTime" value="" />
+                <apex:param name="bookedResourceId" value="" />
+            </apex:actionFunction>
+            
+            <apex:actionFunction name="onSaveBookingClicked" oncomplete="saveBookingOnCompleted();" action="{!Cmd_SaveBooking}" status="overlayStatus" reRender="mainForm">
+                <apex:param name="startTime" value="" />
+                <apex:param name="resourceId" value="" />
+                <apex:param name="driverAssistId" value="" />
+            </apex:actionFunction>
+            
+            <input type="hidden" id="hdDuration" value="{!Model.Duration}" /> 
+            <input type="hidden" id="hdResourceTag" value="{!Model.ResourceTag}" />
+            
+            <div id="dialog" class="new-appointment" style="min-height:645px !important;">
+                <apex:outputPanel styleClass="aside" id="aside">
+                    <div class="grid">
+                        <div class="col-12">
+                            <label>Account</label>
+                            <input type="text" value="{!Model.AccountName}" readonly="readonly" />
+                        </div>
+                    </div>
+                    <apex:outputPanel layout="block" styleClass="grid" rendered="{!Model.VehicleVisible}">
+                        <div class="col-12">
+                            <label>Vehicle</label>
+                            <input type="text" value="{!Model.VehicleName}" readonly="readonly" />
+                        </div>
+                    </apex:outputPanel>
+                    <apex:outputPanel layout="block" styleClass="grid" rendered="{!Model.VehicleVisible}">
+                        <div class="col-12">
+                            <label class="pull-right">Manual Transmission? 
+                                <apex:inputCheckbox selected="{!Model.ManualTransmission}" disabled="true" style="height: 23px; width: 23px;" />
+                            </label>
+                        </div>
+                    </apex:outputPanel>
+                    <div class="grid">
+                        <div class="col-12">
+                            <label>Booking Type</label>
+                            <apex:selectList id="cbJobType" value="{!Model.JobType}" multiselect="false" styleClass="form-control" size="1">
+                                <apex:selectOptions value="{!Model.JobTypeOptions}"/>
+                            </apex:selectList>
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-12">
+                            <label>Booking Duration (minutes)</label>
+                            <apex:inputText id="txtDuration" value="{!Model.Duration}" onchange="" />
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-12">
+                            <label>Location Address</label>
+                            <input type="text" id="txtAddress" value="{!Model.LocationAddress}" />
+                            <apex:inputHidden id="hdAddress" value="{!Model.LocationAddress}" />
+                            <apex:inputHidden id="hdAddressLong" value="{!Model.GeoLoc.Longitude}" />
+                            <apex:inputHidden id="hdAddressLat" value="{!Model.GeoLoc.Latitude}" />
+                        </div>
+                    </div>
+                    <div class="grid">
+                        <div class="col-6">
+                            <label>Location Zip Code</label>
+                            <apex:inputText id="txtZipcode" value="{!Model.Zipcode}" html-readonly="readonly"></apex:inputText>
+                        </div>
+                    </div>
+                </apex:outputPanel>
+                <div class="calendar-wrapper">
+                    <apex:outputPanel styleClass="calendar-header" id="calendarHeader">
+                        <div class="select-region" style="width:224px;">
+                            <label>View Resources Within Sub Region</label>
+                            <apex:selectList id="cbSubRegion" value="{!Model.SubRegionId}" multiselect="false" styleClass="form-control" size="1">
+                                <apex:selectOptions value="{!Model.SubRegionOptions}"/>
+                            </apex:selectList>
+                        </div>
+                        <apex:outputPanel layout="block" rendered="{!Model.DriversAssistVisibility}" styleClass="select-person">
+                            <label>Show with Driver Assist?</label>
+                            <apex:inputCheckbox id="chkDriversAssist" onchange="onDriversAssistChanged();" selected="{!Model.DriversAssist}" style="height:23px; width:23px;" />
+                        </apex:outputPanel>
+                        <div class="select-person">
+                            <label>Trigger email?</label>
+                            <apex:inputCheckbox selected="{!Model.TriggerEmail}" style="height:23px; width:23px;" />
+                        </div>
+                        <input type="text" id="datepickerInput" style="z-index:100;" />
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                $('#datepickerInput').css({left: $('.bg-myDatepicker-button').position().left - 754});
+                            });
+                        </script>
+                    </apex:outputPanel>
+                    <div class="resource-calendar bg" id="calendar">
+                        <div class="bg-toolbar clearfix">
+                            <div style="float:right">
+                                <button type="button" class="bg-prev-button bg-button bg-state-default bg-corner-left bg-corner-right">
+                                    <span class="bg-icon bg-icon-left-single-arrow"></span>
+                                </button>
+                                <h2></h2>
+                                <button type="button" class="bg-myDatepicker-button bg-button bg-state-default bg-corner-left bg-corner-right">Calendar</button>
+                                <button type="button" class="bg-next-button bg-button bg-state-default bg-corner-left bg-corner-right">
+                                    <span class="bg-icon bg-icon-right-single-arrow"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="resource-calendar__container clearfix">
+                            <apex:outputPanel layout="block" rendered="{!Model.ResourceList != null && Model.ResourceList.size > 0 }" styleClass="resource-time-slots">
+                                <div class="resource-item-head">
+                                    <span class="resource-time-name">{!Model.TimezoneShortName}</span>
+                                </div>
+                                <apex:repeat value="{!Model.TimeAxisList}" var="time">
+                                    <div class="resource-time-slot"><span class="resource-time-name">{!time}</span></div>
+                                </apex:repeat>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{!Model.ResourceList != null && Model.ResourceList.size > 0}" styleClass="resource-items-wrapper count-{!Model.ResourceList.size}">
+                                <div class="resource-header">
+                                    <div class="resource-items-wrapper-inner clearfix">
+                                        <apex:repeat value="{!Model.ResourceList}" var="resource">
+                                            <div class="resource-item">
+                                                <div class="resource-item-head">
+                                                    <img src="{!resource.PhotoUrl}" width="40" height="40" alt="" class="resource-item-pic" />
+                                                    <span class="resource-item-name">{!resource.Name}</span>
+                                                </div>
+                                            </div>
+                                        </apex:repeat>
+                                    </div>
+                                </div>
+                                <div class="resource-items-wrapper-inner clearfix">
+                                    
+                                    <apex:repeat value="{!Model.ResourceList}" var="resource">
+                                        <div class="{! IF(resource.DisplayOrder == 1, 'first ', IF(resource.DisplayOrder == Model.ResourceList.size, 'last ', ''))}resource-item">
+                                            <div class="resource-item-head">
+                                                <img src="{!resource.PhotoUrl}" width="40" height="40" alt="" class="resource-item-pic" />
+                                                <span class="resource-item-name">{!resource.Name}</span>
+                                            </div>
+                                            <div class="resource-item-slots">
+                                                
+                                                <div class="resource-time-slot"></div>
+                                                
+                                                <apex:repeat value="{!resource.Timeslots}" var="timeslot">
+                                                    <apex:outputPanel layout="block" styleClass="resource-item-slot{! IF(timeslot.IsRequestedTime, ' requested', '')}"
+                                                                      onclick="openBookingDialog(this, '{!resource.Name}', '{!resource.Id}', {!timeslot.StartTime});">
+                                                        <apex:outputPanel rendered="{!timeslot.IsRequestedTime && resource.DisplayOrder == 1}" layout="inline" styleClass="text-requested">Requested</apex:outputPanel>
+                                                        <div class="resource-time-slot"></div>
+                                                        <div class="resource-item-slot-availability slot-{! IF(timeslot.IsAvailable, '', 'not-')}available {! timeslot.StyleClass }{! IF(timeslot.IsBestSlot, ' best-slot', '') }">
+                                                            <apex:outputPanel layout="block" rendered="{!timeslot.IsAvailable}" styleClass="resource-item-slot-book-action"></apex:outputPanel>
+                                                        </div>
+                                                    </apex:outputPanel>
+                                                </apex:repeat>
+                                            </div>
+                                        </div>
+                                    </apex:repeat>
+                                </div>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" style="color:#a94442;" rendered="{! OutputMessage == '' && Model.ResourceList.size == 0 && !Model.NoOtherJobs}">
+                                <apex:outputText >No available resource.</apex:outputText>
+                            </apex:outputPanel> 
+                            <apex:outputPanel layout="block" style="color:#a94442;" rendered="{! OutputMessage == '' && Model.ResourceList.size == 0 && Model.NoOtherJobs}">
+                                <apex:outputText >No other jobs.</apex:outputText>
+                            </apex:outputPanel> 
+                            <apex:outputPanel layout="block" style="color:#a94442;" rendered="{! OutputMessage != '' && Model.ResourceList.size == 0 }">
+                                <apex:outputText >{!OutputMessage}</apex:outputText>
+                            </apex:outputPanel>
+                            <apex:outputPanel layout="block" rendered="{! PopupMessage != '' }">
+                                <span id="popupMessageSpn" style="display:none;">{!PopupMessage}</span>
+                            </apex:outputPanel>
+                            <script>
+                            function setResourceWrapperWidth() {
+                                var calendar_width = $('body').width() - 275;
+                                console.log('calendar_width', calendar_width);
+                                $('#dialog').width(calendar_width);
+                                
+                                var $calendar = $('#calendar');
+                                var items_count = $calendar.find('.resource-header').find('.resource-item').length;
+                                var max_column = Math.min(items_count, 5.5);
+                                var max_width = $calendar.find('.resource-items-wrapper').width();
+                                var item_width = max_width / max_column;
+                                //console.log('max_width', max_width);
+                                //console.log('item_width', item_width);
+                                //console.log('max_column', max_column);
+                                
+                                $calendar.find('.resource-items-wrapper').addClass('max-' + Math.ceil(max_column));
+                                $calendar.find('.resource-items-wrapper-inner').width(item_width * items_count + 1);
+                                $calendar.find('.resource-header').width(max_width-15);
+                                $calendar.find('.resource-item').width(item_width);
+                                
+                                // Sync scroll
+                                var $resourceTimeSlots = $calendar.find('.resource-time-slots');
+                                var $resourceHeader = $calendar.find('.resource-header');
+                                $calendar.find('.resource-items-wrapper').scroll(function() {
+                                    var scrollTop = $(this).scrollTop();
+                                    var scrollLeft = $(this).scrollLeft();
+                                    $resourceTimeSlots.scrollTop(scrollTop);
+                                    $resourceHeader.scrollLeft(scrollLeft);
+                                });
+                                
+                            }
+                            $(document).ready(function() {
+                                setResourceWrapperWidth()
+                                $(window).on('resize', function() {
+                                    setResourceWrapperWidth();
+                                })
+                            })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="jobDialog">
+                <div class="grid">
+                    <div class="col-6">
+                        <label><span>Booking Type</span>: <b><span id="spnJobType"></span></b></label>
+                        <label><span>Selected Resource: <b><span id="spnResourceName"></span></b></span></label>
+                        <label><span>Selected Date</span>: <b><span id="spnSelectedDate"></span></b></label>
+                        <label><span>Start: <b><span id="spnStartTime"></span></b></span> - <span>End: <b><span id="spnEndTime"></span></b></span></label>
+                        <label><span>Duration</span>: <b><span id="spnDuration"></span> minutes</b></label>
+                    </div>
+                    <apex:outputPanel layout="block" rendered="{! AND(Model.DriversAssistVisibility, Model.DriversAssist) }" styleClass="col-6">
+                        <label>Select available Drivers Assist in region</label>
+                        <apex:outputPanel id="divDrivers" layout="block" styleClass="grid" rendered="{! Model.DriversAssistList.size > 0}">
+                            <apex:repeat value="{!Model.DriversAssistList}" var="driversAssist">
+                                <input type="checkbox" value="{!driversAssist.Id}" /> <span>{!driversAssist.Name}</span><br/>
+                            </apex:repeat>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="block" rendered="{! Model.DriversAssistList.size == 0}">
+                            <apex:outputText >There is no available drivers-assist.</apex:outputText>
+                        </apex:outputPanel> 
+                    </apex:outputPanel>
+                </div>
+            </div>
+            
+        </apex:form>
+    </body>
+    
+</apex:page>

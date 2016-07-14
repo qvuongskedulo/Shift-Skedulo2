@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Buyer_Opportunity_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Buyer Opportunity</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value is not a Buyer Opportunity</errorMessage>
+            <filterItems>
+                <field>Opportunity.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Buyer</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Vehicle Interests</relationshipLabel>
+        <relationshipName>Vehicle_Interests</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Buyer_Opportunity_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>Buyer_Opportunity_ID__r.Owner.FirstName + &quot; &quot; + Buyer_Opportunity_ID__r.Owner.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Buyer Opportunity Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Buyer_Opportunity_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Buyer_Opportunity_ID__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Buyer Opportunity Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_If_Deposit_Falls_Through__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Contact If Deposit Falls Through</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact_On_Price_Drop__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>Contact On Price Drop</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Contact_When_Available_For_Sale__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Contact When Available For Sale</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Generate_Financing_Link__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;https://shiftcars1.appspot.com/admin/get_financing_link/&quot; &amp; SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(CASESAFEID(Vehicle_ID__c), &quot;%&quot;, &quot;%25&quot;), &quot;&amp;&quot;, &quot;%26&quot;), &quot;?&quot;, &quot;%3F&quot;) &amp; &quot;/&quot; &amp; SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(CASESAFEID(Buyer_Opportunity_ID__r.Account.Id), &quot;%&quot;, &quot;%25&quot;), &quot;&amp;&quot;, &quot;%26&quot;), &quot;?&quot;, &quot;%3F&quot;), &quot;Generate financing link&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Generate Financing Link</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Generate_Shift_Financing_Link__c</fullName>
+        <description>Generate link to the Shift captive financing application (not to be confused with third-party financing page)</description>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;https://shiftcars1.appspot.com/admin/get_financing_link/&quot; &amp; SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(CASESAFEID(Vehicle_ID__c), &quot;%&quot;, &quot;%25&quot;), &quot;&amp;&quot;, &quot;%26&quot;), &quot;?&quot;, &quot;%3F&quot;) &amp; &quot;/&quot; &amp; SUBSTITUTE(SUBSTITUTE(SUBSTITUTE(CASESAFEID(Buyer_Opportunity_ID__r.Account.Id), &quot;%&quot;, &quot;%25&quot;), &quot;&amp;&quot;, &quot;%26&quot;), &quot;?&quot;, &quot;%3F&quot;) &amp; &quot;?for=shift&quot;, &quot;Generate Shift financing link&quot;)</formula>
+        <label>Generate Shift Financing Link</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migration_Source_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Migration Source ID</label>
+        <referenceTo>Migration_Source__c</referenceTo>
+        <relationshipName>Buyer_Interests</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Migration_Tree_ID__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>Migration Tree ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Cancelled__c</fullName>
+        <externalId>false</externalId>
+        <formula>Test_Drive_Count_Cancelled__c &gt; 0</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Test Drive Cancelled</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Count_Cancelled__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Drive Count Cancelled</label>
+        <summaryFilterItems>
+            <field>Test_Drive__c.Canceled__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Test_Drive__c.Vehicle_Interest_ID__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Count__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Drive Count</label>
+        <summaryForeignKey>Test_Drive__c.Vehicle_Interest_ID__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive__c</fullName>
+        <externalId>false</externalId>
+        <formula>Test_Drive_Count__c &gt; 0</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Test Drive</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Vehicle_Detail_URL__c</fullName>
+        <externalId>false</externalId>
+        <formula>Vehicle_ID__r.Detail_URL__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Vehicle Detail URL</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vehicle_ID__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Vehicle</label>
+        <lookupFilter>
+            <active>false</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Vehicle__c</referenceTo>
+        <relationshipLabel>Vehicle Interests</relationshipLabel>
+        <relationshipName>Vehicle_Interests</relationshipName>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Vehicle Interest</label>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Vehicle Interest Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Vehicle Interests</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

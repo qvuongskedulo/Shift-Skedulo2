@@ -1,0 +1,6 @@
+<apex:page docType="html-5.0" showHeader="true" sidebar="true" title="CX Car Search">
+
+    <h1>CX Car Search (shows up to 99 results per stage)</h1>
+    <c:ShiftCxCarSearch focus="true"/>
+
+</apex:page>

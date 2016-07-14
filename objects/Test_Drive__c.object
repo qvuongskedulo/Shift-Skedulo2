@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Test Drive related to a Buyer Opportunity</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Base_Deal_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Base Deal ID</label>
+        <length>19</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Base_Enthusiast_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Base Enthusiast ID</label>
+        <length>19</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Base_Scheduled_By__c</fullName>
+        <externalId>false</externalId>
+        <label>Base Scheduled By</label>
+        <length>19</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Canceled_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Canceled Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Below $250 Shift Margin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Car already sold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Car in shop/not working</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Car on deposit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer bought another car (not with Shift)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer bought another car (with Shift)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer no longer interested</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No show</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shift Error</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Switched interest to another Shift car</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Timing issue on customer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Timing issue on Shift</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Weather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Canceled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Canceled</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Chance_To_Win__c</fullName>
+        <externalId>false</externalId>
+        <label>Chance To Win</label>
+        <picklist>
+            <picklistValues>
+                <fullName>0%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>20%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>50%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>80%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>100%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Customer_Experience_Calendar_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Experience Calendar Notes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Departs_At__c</fullName>
+        <description>Date/time when a car needs to leave the hub</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date/time when a car needs to leave the hub</inlineHelpText>
+        <label>Departs At</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Detailing_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Detailing Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Claimed</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Key Ready, Prep Not Started</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Can&apos;t Find Key or Car</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Driver_Assist_By_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Driver Assist By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Test_Drives2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GeoLocation__c</fullName>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>GeoLocation</label>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_At__c</fullName>
+        <description>Time at which this object was migrated</description>
+        <externalId>false</externalId>
+        <label>Migrated At</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Migration_Source_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Base object from which this object was migrated.</description>
+        <externalId>false</externalId>
+        <label>Migration Source ID</label>
+        <referenceTo>Migration_Source__c</referenceTo>
+        <relationshipLabel>Test Drives</relationshipLabel>
+        <relationshipName>Test_Drives</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Migration_Tree_ID__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>Migration Tree ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Next_Steps__c</fullName>
+        <externalId>false</externalId>
+        <label>Next Steps</label>
+        <picklist>
+            <picklistValues>
+                <fullName>CE - Apply For Financing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Email Requested Information To Buyer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Schedule Delivery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CX - Schedule Another Test Drive</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Recommend Another Car</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up In Two Days</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up In One Weeks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up In Two Weeks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up In Four Weeks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up In Three Weeks</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE - Follow Up When Vehicle Repaired</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>- How did the test drive go?
+- Did they commit to buying? If not, what were their objections?
+- What is the action plan to get them into a car they want</inlineHelpText>
+        <label>Notes</label>
+        <length>1000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Original_Time_Requested__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Time Requested</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Rescheduled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Rescheduled</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Scheduled By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Test_Drives1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Scheduled_By_ID__r.FirstName &amp; &quot; &quot; &amp;  Scheduled_By_ID__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scheduled By Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduled_For__c</fullName>
+        <externalId>false</externalId>
+        <label>Scheduled For</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Selected_Geolocation__c</fullName>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>Geolocation</label>
+        <required>false</required>
+        <scale>7</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_By_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Test Drive By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Test_Drives</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_By_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Test_Drive_By_ID__r.FirstName &amp; &quot; &quot; &amp;  Test_Drive_By_ID__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Test Drive By Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Follow_Up_Results__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Drive Follow Up Results</label>
+        <length>1000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Lost_Reason__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Drive Lost Reason</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Bought Another Vehicle - Dealer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bought Another Vehicle - Private</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Bought Another Vehicle - Shift</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Car Condition</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Car Sold To Another Buyer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Does Not Like Car</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financing - Low Credit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Limited Financing Options</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Listing Inaccuracy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Answer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Poor Customer Experience</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Price - Cannot Afford</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Price - Overpriced</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Still Shopping</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Outcome__c</fullName>
+        <externalId>false</externalId>
+        <label>Test Drive Outcome</label>
+        <picklist>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deposit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lost</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Pushed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Test Drive Pushed</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Test_Drive_Survey__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Test Drive Survey</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Shift_Survey__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Test Drive</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Shift_Survey__c</referenceTo>
+        <relationshipLabel>Test Drives</relationshipLabel>
+        <relationshipName>Test_Drives</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Vehicle_Interest_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Vehicle Interest</label>
+        <referenceTo>Vehicle_Interest__c</referenceTo>
+        <relationshipLabel>Test Drives</relationshipLabel>
+        <relationshipName>Test_Drives</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Test Drive</label>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Test Drive Name</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Test Drives</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Disallow_Test_Drive_When_Coming_Soon</fullName>
+        <active>false</active>
+        <errorConditionFormula>Vehicle_Interest_ID__r.Vehicle_ID__r.Coming_Soon__c = TRUE &amp;&amp;  ISNEW()</errorConditionFormula>
+        <errorMessage>Test Drive cannot be booked. Vehicle is coming soon.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Disallow_Test_Drive_When_Sale_Pending</fullName>
+        <active>true</active>
+        <errorConditionFormula>Vehicle_Interest_ID__r.Vehicle_ID__r.Sale_Pending__c = True &amp;&amp; ISNEW()</errorConditionFormula>
+        <errorMessage>Test Drive cannot be booked. Vehicle is sale pending.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Reschedule</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reschedule</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+var jobResult = sforce.connection.query(&quot;SELECT Id, sked__Job_Status__c FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Test_Drive__c = &apos;{!Test_Drive__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length == 0) {
+alert(&apos;This test drive has not been scheduled yet.&apos;);
+}
+else {
+
+var hasCompletedJob = false;
+for (var i = 0; i &lt; jobRecords.length; i++) {
+if (jobRecords[i].sked__Job_Status__c == &apos;Complete&apos; || jobRecords[i].sked__Job_Status__c == &apos;In Progress&apos;) {
+hasCompletedJob = true;
+}
+}
+
+if (hasCompletedJob) {
+alert(&apos;Cannot reschedule complete/in progress jobs.&apos;);
+}
+else {
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Test_Drive__c.Id}&amp;type=testdrive&amp;mode=reschedule &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Schedule_Appointment</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Schedule Appointment</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+if ({!Test_Drive__c.Canceled__c}) {
+    alert(&apos;This test drive has been canceled and cannot be booked for appointment.&apos;);
+}
+else {
+
+var jobResult = sforce.connection.query(&quot;SELECT Id FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Test_Drive__c = &apos;{!Test_Drive__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length &gt; 0) {
+    alert(&apos;This test drive has been scheduled and cannot be booked for appointment.&apos;);
+}
+else {
+
+var j$ = jQuery.noConflict(); 
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Test_Drive__c.Id}&amp;type=testdrive &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+
+}
+
+}</url>
+    </webLinks>
+</CustomObject>

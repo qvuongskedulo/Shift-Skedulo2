@@ -1,0 +1,3 @@
+<apex:page showheader="false" standardStylesheets="false" standardController="Opportunity">
+<TSS_StickIt_MR1:StickIt_Dual sObjectId="{!Id}" order_by="Name"/>
+</apex:page>

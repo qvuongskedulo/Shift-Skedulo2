@@ -1,0 +1,1 @@
+public virtual class skedException extends Exception {}

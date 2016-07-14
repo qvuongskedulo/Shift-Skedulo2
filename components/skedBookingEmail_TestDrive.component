@@ -1,0 +1,202 @@
+<apex:component access="global" controller="skedBookingEmailController">
+    
+    <apex:attribute name="appointmentId" access="global" assignTo="{!JobId}" description="" type="String" />
+    
+ <style type="text/css">
+        .explain {
+        width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;
+
+        }
+
+      body{
+      margin:0;
+      padding:0;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size:14px;
+      line-height:32px;
+      color:#414141;
+    }
+
+    a {color: #e14e4e;
+    text-decoration: none;
+
+    }
+
+        .logoheader{
+      width: 100px;
+    }
+        
+    </style>
+    
+    <body leftmargin="0" rightmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+    <center>
+     
+      
+      <!-- Day, Address, CC Confirmation -->
+      
+      <table border="0" cellspacing="0" width="100%" style="background-color: #fafafa;">
+        <tbody>
+          <tr>
+            <td colspan="3" style="background-color: #fafafa;">
+              <table border="0" cellspacing="0" width="100%">
+                <tr>
+                  <td></td>
+                  <td width="450" style="text-align:left; padding:30px 0px;">
+
+              <p class="explain" style="width:450px;">
+
+              <a href="http://shift.com"><img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/a38e5894-92bc-4aab-a542-c30b815baa12.png" class="logoheader" width="100px" /></a>
+              </p>
+              <br />
+              <p class="explain" style="width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;">
+
+                  Hi {!BuyerFirstName}, You're on your way to test driving the <strong>{!VehicleName}</strong>! Take a moment to double check the details about your test drive:
+                  </p>
+                 
+                  </td><td></td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        
+           
+          <tr>
+            <td colspan="3">
+              <table width="100%" border="0">
+                <tr>
+                  <td></td>
+                  <td width="450">
+                    <table width="100%" border="0">
+                      <tr>
+                        <td>
+                          <table width="100%" cellspacing="0" border="0" style="border: 1px solid #ececec; border-radius:5px; background-color: #fff;">
+                            <tr>
+                              <td>
+                              
+                                <table width="100%" border="0">
+                             <tr valign="center" align="center" style="padding-top:15px;">
+                             <br />
+                            
+                             
+                             </tr>
+                                  <tr>
+                                  <td></td>
+<td width="20%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/3ca994f0-b61f-4132-b7fa-293484a35d3d.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;" />
+</td>
+<td style="color: #424242; padding:20px 0; font-size: 14px; line-height: 22px;" valign="center">
+<strong>{!AppointmentDate}</strong><br />
+{!AppointmentTime}
+
+</td>
+</tr>
+                                    <tr>
+                                  <td></td>
+<td width="20%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/b97bf1fd-4a3e-49b2-ad40-1bec27e7f312.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize; line-height: 22px;" />
+</td>
+<td style="color: #424242; padding:0; font-size: 14px;" valign="center">
+{!LocationAddress}
+
+</td>
+</tr>
+
+                                    <tr>
+                                  <td></td>
+<td width="20%" valign="center" align="center">
+<img src="https://gallery.mailchimp.com/8271590f37fd12ff50bc376c2/images/b8a35a60-5771-4a3f-ac0c-b82701dafdf0.png" style=" padding:0px auto;border: none;font-size: 14px;font-weight: bold;height: auto;line-height: 100%;outline: none;text-decoration: none;text-transform: capitalize;" />
+</td>
+<td style="color: #424242; padding:30px 0; font-size: 14px; line-height: 22px;" valign="center">Your Car Enthusiast:<br />
+  <strong>{!ResourceName}</strong>
+  <br />
+  {!ResourcePhone}
+</td>
+</tr>
+                                  <tr>
+                                    
+                                  </tr>
+                            </table>
+                            
+                              </td>
+                            </tr>
+                          </table>
+                         
+                                                 
+                        </td>
+                      </tr>
+                    </table>
+                    
+
+                  </td>
+                  <td></td>
+                </tr>
+                
+              </table>
+              <br />
+                <center>
+                    <p class="explain" style="width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;">
+                        <strong>Please have your driver's license handy</strong> <br /> 
+                        Just a heads up: our cars are on a first-come, first-served basis. In the event this car is purchased before your scheduled test drive, we'll let you know right away.
+                    </p>
+                </center>
+                <center><p class="explain" style="width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;">If you have any questions, feel free to reach out to your Car Enthusiast, {!ResourceName}, at <strong>{!ResourceEmail}</strong>. If you need to cancel or reschedule this test drive, please let us know at least 24 hours in advance by calling 855-744-3801 or replying all to this email.
+                    </p></center>
+<br />
+                    <center><p class="explain" style="width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;">
+                     <strong>Want to get a head start on financing?</strong> <br /> 
+                     Shift can connect you with out financing partners right away. <br />
+                     <a href="https://shift.com/finance-purchase">Click here to get started.</a>
+                    </p></center>
+<br />
+                    <center><p class="explain" style="width: 450px;
+        text-align: left;
+              font-size:14px;
+                    line-height:22px;">
+                     <strong>We have your back with extended warranties</strong> <br /> 
+                     Some of our vehicles still have the original manufacturers warranty. If not we can always offer you an extended warranty through AUL. <br />
+                     <a href="https://shift.com/aulwarranty">Learn more here.</a>
+                    </p>
+                    <br /><br />
+
+                    <table width="450px">
+      <tr>
+    <td></td>
+    <td align="left" style="font-size: 12px; color: #9b9b9b ; padding-bottom: 30px;">
+        <hr class="divider"></hr><br />
+        <p style="line-height: 10px; color: #000000"><a href="http://www.shift.com" style="color: black; Text-decoration: none;"><strong>SHIFT.COM</strong></a></p>
+        <p style="line-height: 10px;"><a href="tel:855-744-3801" style="color: #9b9b9b; Text-decoration: none;">855.744.3801</a><span style="padding-right: 10px; padding-left: 10px;">|</span>2500 Market St., San Francisco, CA 94114</p>
+        <p style="line-height: 10px;"><a href="https://www.yelp.com/biz/shift-san-francisco-3"> Hear from our happy customers on Yelp</a></p>
+        </td>
+</tr>
+</table>
+<br /><br />
+</center>
+            </td>
+            <td>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+  
+    </center>
+  </body>
+    
+
+    
+</apex:component>

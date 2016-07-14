@@ -1,0 +1,18 @@
+<apex:page showHeader="true" sidebar="true" standardController="Vehicle_Order__c" extensions="BluewolfRequestContExt">
+    <apex:form >
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock title="Submit Pickup Request">
+            <div>
+                <apex:outputText style="font-size: 10pt; font-weight:bold;" value="Why does this vehicle need to be temporarily returned?"/>
+            </div>
+            <div>
+                <apex:inputField style="height: 150px; width: 70%;" value="{!vehicleOrder.Returned_Notes__c}" required="true"/>
+            </div>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!createPickupRequest}" value="OK"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

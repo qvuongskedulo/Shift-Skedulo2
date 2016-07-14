@@ -1,0 +1,225 @@
+<apex:component >
+    <script type="text/javascript">
+    var parent_domain, rootRecordId;
+    var datepickerInput, jobDialog, minDate, selectedDate, selectedResourceId, selectedResourceName, selectedStartTime, regionTimezone;
+    
+    function onDocumentReady() {
+        
+        minDate = new Date(minDate);
+        selectedDate = new Date(selectedDate);
+        
+        datepickerInput = $('#datepickerInput').datepicker({
+            dateFormat: "MM d, yy",
+            minDate: minDate,
+            onSelect: function(dateText, inst) {
+                //$('.bg-toolbar h2').text(dateText);
+                var d = new Date(dateText);
+                setSelectedDate(d);
+            }
+        });
+        
+        $('.bg-myDatepicker-button').click(function () {
+            datepickerInput.datepicker('show');
+        });
+        
+        $('.bg-prev-button').click(function() {
+            previousDateOnClick();
+        });
+        
+        $('.bg-next-button').click(function() {
+            nextDateOnClick();
+        });
+        
+        $('select[id$=cbJobType]').change(function () {
+            onJobTypeChanged($(this).val());
+        });
+        
+        $('select[id$=cbSubRegion]').change(function () {
+            onRegionChanged($(this).val());
+        });
+        
+        $('input[id$=txtDuration]').change(function () {
+            var duration = $(this).val();
+            if ($.isNumeric(duration)) {
+                onDurationChanged(duration);
+            } else {
+            	alert('Please enter a valid duration.');
+            }
+        });
+        
+        initializeBookingDialog();
+        initializeAutocompleteAddress();
+        
+        datepickerInput.datepicker('setDate', selectedDate);
+        $('.bg-toolbar h2').text(datepickerInput.datepicker().val());
+        
+        if (minDate.getTime() == selectedDate.getTime()) {
+            $('.bg-prev-button').attr('disabled', 'disabled');
+        }
+    }
+    
+    /* calendar toolbar */
+    function previousDateOnClick() {
+        var selectedDate = datepickerInput.datepicker('getDate');
+        if (minDate.getTime() == selectedDate.getTime()) {
+            $('.bg-prev-button').attr('disabled', 'disabled');
+        } else {
+            selectedDate.setDate(selectedDate.getDate() - 1);
+            setSelectedDate(selectedDate);
+        }
+    }
+    
+    function nextDateOnClick() {
+        var selectedDate = datepickerInput.datepicker('getDate');
+        selectedDate.setDate(selectedDate.getDate() + 1);
+        setSelectedDate(selectedDate);
+        
+        if(selectedDate.getTime() > minDate.getTime()) {
+            $('.bg-prev-button').removeAttr('disabled');
+        }
+    }
+    
+    function getDateString(d) {
+        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+    }
+    function setSelectedDate(d) {
+        datepickerInput.datepicker('setDate', d);
+        $('.bg-toolbar h2').text(datepickerInput.datepicker().val());
+        var dateString = getDateString(d);
+        onSelectedDateChanged(dateString);
+    }
+    /* end calendar toolbar */
+    
+    /* google map autocomplete */
+    function initializeAutocompleteAddress() {
+        var autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('txtAddress'),
+            { types: ['geocode'], componentRestrictions: {country: 'us'} });
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) return;     // A place was not found.
+            
+            var components = place.address_components;
+            var geometry = place.geometry.location;
+            
+            var getComponentName = function(type){
+                var result = _.find( components, function( comp ){ return _.contains( comp.types, type ); });
+                return result ? result.long_name : ''
+            }
+            
+            var zipcode = getComponentName('postal_code');
+            var fullAddress = place.formatted_address;
+            $('#txtAddress').val(fullAddress);
+            $('input[id$=hdAddress]').val(fullAddress);
+            $('input[id$=hdAddressLong]').val(geometry.lng());
+            $('input[id$=hdAddressLat]').val(geometry.lat());
+            $('input[id$=txtZipcode]').val(zipcode);
+            
+            onLocationAddressChanged();
+        });
+    }
+    /* end google map autocomplete */
+    
+    /* booking dialog */
+    function initializeBookingDialog() {
+        jobDialog = $('#jobDialog').dialog({
+            autoOpen: false,
+            title: 'Confirm Booking',
+            resizable: false,
+            width: 750,
+            height: 450,
+            autoResize: true,
+            modal: true,
+            draggable: true,
+            buttons: [
+                {
+                    text: 'Save Booking',
+                    click: saveBooking
+                }
+            ],
+            create:function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-buttonset button")
+                .addClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+            }
+        });
+    }
+    function openBookingDialog(element, resourceName, resourceId, startTime) {
+        if ($(element).find('.slot-not-available').length > 0) {
+            return;
+        }
+    
+        selectedResourceId = resourceId; 
+        selectedStartTime = startTime;
+        selectedResourceName = resourceName;
+        
+        var driversAssist = $('input[id$=chkDriversAssist]').prop('checked');
+        if (driversAssist) {
+            onLoadDriversAssist(startTime, resourceId);
+        } else {
+            loadJobDialogInfo();
+            jobDialog.dialog('open');
+        }
+    }
+    function loadJobDialogInfo() {
+        var duration = Number($('#hdDuration').val());
+        jobDialog.find('#spnResourceName').text(selectedResourceName);
+        jobDialog.find('#spnStartTime').text(getTimeText(selectedStartTime));
+        jobDialog.find('#spnEndTime').text(getTimeText(selectedStartTime + duration));
+        jobDialog.find('#spnSelectedDate').text($('#datepickerInput').val());
+        jobDialog.find('#spnJobType').text($('select[id$=cbJobType]').val());
+        jobDialog.find('#spnDuration').text(duration);
+        
+        var driversAssistChks = jobDialog.find('input[type=checkbox]');
+        $(driversAssistChks).each(function(index) {
+        	$(driversAssistChks[index]).change(function () {
+                driversAssistChks.not(this).prop('checked', false); 
+            });
+        });
+    }
+    function onLoadDriversAssistCompleted() {
+        loadJobDialogInfo();
+    	jobDialog.dialog('open');
+    }
+    function saveBooking() {
+        var driverAssistId = '';
+        var driversAssist = $('input[id$=chkDriversAssist]').prop('checked');
+        if (driversAssist) {
+            driverAssistId = jobDialog.find('input[type=checkbox]:checked').val();
+            if (driverAssistId == undefined || driverAssistId == '') {
+                alert('Please select driver assist.');
+                return;
+            }
+        }
+        jobDialog.dialog('close');
+        onSaveBookingClicked(selectedStartTime, selectedResourceId, driverAssistId);
+    }
+    function onRefreshParent() {
+        window.open(parent_domain + '/' + rootRecordId , "_top");   
+    }
+    function saveBookingOnCompleted() {
+        var popupMessage = $('#popupMessageSpn').text();
+        if (popupMessage != '') {
+        	alert(popupMessage);
+        } 
+        onRefreshParent();
+    }
+    function getTimeText(timeValueInMinutes) {
+        var hours = parseInt(timeValueInMinutes / 60);
+        var minutes = timeValueInMinutes - hours * 60;
+        var period = 'am';
+        hours = hours % 24;
+        if (hours >= 12) {
+            period = 'pm';
+            if (hours > 12) {
+                hours = hours - 12;
+            }
+        }
+        var minuteText = minutes + '00';
+        minuteText = minuteText.substring(0, 2);
+        return hours + ':' + minuteText + period;
+    }
+    /* end booking dialog */
+    
+    </script>
+</apex:component>

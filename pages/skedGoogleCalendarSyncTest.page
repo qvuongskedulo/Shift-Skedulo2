@@ -1,0 +1,13 @@
+<apex:page controller="skedGoogleCalendarSyncTestController">
+    
+    <apex:form id="mainForm">
+        <apex:pageBlock title="Manual Sync to Google Calendar">
+            
+            <apex:pageBlockSection columns="1">
+                <apex:commandButton value="Execute" action="{!Cmd_ExecuteManualSync}" />
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+    
+</apex:page>

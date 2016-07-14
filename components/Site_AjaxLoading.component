@@ -1,0 +1,32 @@
+<apex:component >
+	<apex:attribute name="style" default="spinner" type="string" description="the name of the style [spinner, bar]"/>
+	<style>
+		<apex:outputPanel layout="none" rendered="{!style == 'spinner'}">
+		#overlay {
+		    z-index:1000;
+		    position:fixed; top:0; left:0;
+		    width:100%; height:100%;
+		    opacity:0.45; -moz-opacity:0.45; filter:alpha(opacity=45);
+		    background:#fff url(/img/loading.gif) no-repeat center center;
+		}
+		</apex:outputPanel>
+
+		<apex:outputPanel layout="none" rendered="{!style == 'bar'}">
+		#overlay{
+		    background:#000 url('http://blogs.nvidia.com/wp-content/themes/nvidia/images/ajax-bar.gif') center center no-repeat;
+		    z-index:1000;
+		    position:fixed;
+		    top:0; left:0;
+		    width:100%;height:100%;
+		    opacity:0.75; -moz-opacity:0.75; filter:alpha(opacity=75);
+		}
+		</apex:outputPanel>
+	</style>
+
+	<apex:actionStatus id="overlayStatus" onstart="onAjaxStart()" onstop="onAjaxStop()">
+		<apex:facet name="start">
+			<div id="overlay"></div>
+		</apex:facet>
+	</apex:actionStatus>
+
+</apex:component>

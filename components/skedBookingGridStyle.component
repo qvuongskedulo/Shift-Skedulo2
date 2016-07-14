@@ -1,0 +1,413 @@
+<apex:component >
+    
+    <style type="text/css">
+        html, body {
+            overflow: hidden;
+            min-width: auto !important;
+        }
+        .dialog1 {
+        top: 60px!important
+        }
+        
+        .new-appointment {
+        /*min-height: 850px!important;*/
+        position: relative;
+        padding: 0 0 0 265px!important;
+        width: calc(100% - 445px);
+        }
+        
+        .new-appointment .aside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 265px;
+        padding: 10px !important;
+        border-right: 1px solid #dfe4f2;
+        box-sizing: border-box;
+        -ms-box-sizing: border-box
+        }
+        
+        .new-appointment .calendar-wrapper {
+        height: 100%;
+        width: 100%;
+        padding: 47px 23px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -ms-box-sizing: border-box
+        }
+        
+        .new-appointment .calendar-header {
+        position: relative
+        }
+        
+        .new-appointment .calendar {
+        padding-top: 24px
+        }
+        
+        #datepickerInput {
+        position: absolute;
+        top: 25px;
+        right: 220px;
+        width: 10px;
+        height: 40px;
+        opacity: 0
+        }
+        
+        .select-person,
+        .select-region {
+        width: 172px;
+        margin-right: 18px;
+        float: left
+        }
+        .new-appointment .aside,
+        .new-appointment .calendar-wrapper {
+            padding: 10px 10px 10px 20px;
+        }
+        
+        .resource-header {
+        position: absolute;
+        z-index: 99;
+        overflow: hidden;
+        height: 52px;
+        white-space: nowrap;
+        }
+        
+        .resource-calendar {
+        margin-top: 25px;
+        }
+        
+        .resource-calendar div {
+        box-sizing: border-box;
+        }
+        
+        .resource-time-slots {
+        width: 60px;
+        float: left;
+        max-height: 555px;
+        overflow: hidden;
+        }
+        
+        .resource-items-wrapper {
+        width: auto;
+        height: 100%;
+        max-height: 570px;
+        overflow-x: auto;
+        overflow-y: auto;
+        float: none;
+        }
+        
+        .resource-item {
+        float: left;
+        }
+        
+        .resource-items-wrapper.max-5 .resource-item {
+        width: 200px;
+        }
+        
+        .resource-items-wrapper.max-4 .resource-item {
+        width: 25%;
+        }
+        
+        .resource-items-wrapper.max-3 .resource-item {
+        width: 33.33%;
+        }
+        
+        .resource-items-wrapper.max-2 .resource-item {
+        width: 50%;
+        }
+        
+        .resource-items-wrapper.max-1 .resource-item {
+        float: none;
+        }
+        
+        .resource-item-head {
+        background-color: #F8F9FB;
+        border: solid 1px #E3E7F3;
+        height: 52px;
+        padding: 5px;
+        }
+        
+        .resource-item + .resource-item .resource-item-head {
+        border-left: none;
+        }
+        
+        .resource-item + .resource-item .resource-time-slot {
+        border-left: none;
+        }
+        
+        .requested.resource-item-slot .resource-time-slot {
+        border-bottom: solid 4px #4E92DF;
+        border-top: solid 4px #4E92DF;
+        }
+        
+        .first.resource-item .requested.resource-item-slot .resource-time-slot {
+        border-left: solid 4px #4E92DF;
+        }
+        
+        .last.resource-item .requested.resource-item-slot .resource-time-slot {
+        border-right: solid 4px #4E92DF;
+        }
+        
+        .text-requested {
+        display: none;
+        }
+        
+        .first.resource-item .requested.resource-item-slot .text-requested {
+        display: block;
+        color: white;
+        background-color: #4E92DF;
+        position: absolute;
+        height: 21px;
+        font-size: 14px;
+        padding: 0px 6px;
+        left: 0;
+        top: -20px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        }
+        
+        .resource-item-head img {
+        width: 40px;
+        float: left;
+        margin-right: 10px;
+        vertical-align: middle;
+        }
+        
+        .resource-item-name {
+        font-size: 14px;
+        color: #494949;
+        padding: 0;
+        line-height: 40px;
+        display: inline-block;
+        width: 66%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: bold;
+        font-size: 14px;
+        }
+        
+        .resource-time-slot {
+        border: solid 2px #E3E7F3;
+        border-top: none;
+        height: 40px;
+        }
+        
+        .resource-item-slot {
+        position: relative;
+        }
+        
+        .resource-item-slot-availability {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        padding: 3px;
+        left: 0;
+        top: 0;
+        }
+        
+        .resource-item-slot-availability:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        border-radius: 3px;
+        top: 3px;
+        right: 3px;
+        bottom: 3px;
+        left: 3px;
+        }
+        
+        .resource-item-slot-availability.slot-available:before {
+        background-color: rgba(237, 247, 226, 0.64);
+        border: solid 1px #9FDD5B;
+        cursor: pointer;
+        }
+        
+        .resource-item-slot-availability.slot-available:hover:before {
+        border-style: dotted;
+        }
+        
+        .resource-item-slot-availability.slot-available.best-slot:before {
+        background-color: rgba(189, 255, 115, 0.64);
+        }
+        
+        .resource-item-slot-availability.slot-not-available:before {
+        background-color: rgba(234, 234, 234, 0.64);
+        border: solid 1px #D3D3D3;
+        }
+        
+        .resource-item-slot-book-action {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        border: dotted 2px #9FDD5B;
+        left: 50%;
+        top: 50%;
+        margin-left: -12px;
+        margin-top: -12px;
+        border-radius: 3px;
+        cursor: pointer;
+        line-height: 20px;
+        }
+        
+        .resource-item-slot-availability.slot-available:hover .resource-item-slot-book-action {
+        border-style: dotted;
+        }
+        
+        .resource-item-slot-book-action:after {
+        content: "+";
+        position: absolute;
+        color: #9FDD5B;
+        font-size: 30px;
+        left: 2px;
+        top: 4px;
+        display: block;
+        width: 16px;
+        height: 16px;
+        line-height: 10px;
+        text-align: center;
+        }
+        
+        .resource-item-slot-availability.slot-available:hover .resource-item-slot-book-action:after {
+        color: #45CED9;
+        }
+        
+        .resource-item-slot-availability.slot-not-available .resource-item-slot-book-action {
+        display: none;
+        }
+        
+        .resource-time-slots > div {
+        border-color: white;
+        background-color: white;
+        position: relative;
+        }
+        
+        .resource-time-name {
+        color: gray;
+        position: absolute;
+        bottom: -24px;
+        z-index: 99;
+        right: 10px;
+        line-height: 9px;
+        font-size: 12px;
+        }
+        
+        
+        
+        .form-control {
+        display: block;
+        width: 100%;
+        height: 40px !important;
+        padding: 4px 13px;
+        font-size: 14px;
+        line-height: 1.42857143;
+        color: #787878;
+        background-color: #fff;
+        background-image: none;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+        -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+        }
+        select.form-control {
+        max-width:100%;
+        min-width:100%;
+        }
+        
+        .bg-toolbar {
+        text-align:center;
+        margin-bottom:1em;
+        }
+        .bg .bg-toolbar>*>* {
+        float:left;
+        margin-left:.75em;
+        }
+        .bg-toolbar h2{
+        margin:0;
+        }
+        .bg-toolbar button {
+        position:relative;
+        }
+        .bg-state-default {
+        border: 1px solid;
+        }
+        .bg-state-default.bg-corner-right {
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        }
+        .bg-state-default.bg-corner-left {
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        }
+        .bg-button {
+        font-size:14px;
+        color: #777;
+        border-color: #dfe4f2;
+        padding: 0 10px;
+        line-height: 38px;
+        height: 40px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        background:#fff;
+        }
+        .bg button:hover, .bg button:active {
+        background:#e6e6e6;
+        border-color:#b3bfe0;
+        }
+        .bg button:focus {
+        background:#e6e6e6;
+        border-color:#8498cd;
+        outline:0;
+        }
+        .bg button:active:focus, .bg button:active:hover {
+        background:#d4d4d4;
+        border-color:#8498cd;
+        }
+        .bg button .bg-icon {
+        position: relative;
+        top: -.05em;
+        margin: 0 .2em;
+        vertical-align: middle;
+        }
+        .bg-icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 1em;
+        font-size: 1em;
+        text-align: center;
+        overflow: hidden;
+        font-family: "Courier New",Courier,monospace;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        }
+        .bg-icon-left-single-arrow:after {
+        content: "\02039";
+        font-weight: 700;
+        font-size: 200%;
+        top: -7%;
+        left: 3%;
+        }
+        .bg-icon-right-single-arrow:after {
+        content: "\0203A";
+        font-weight: 700;
+        font-size: 200%;
+        top: -7%;
+        left: -3%;
+        }
+        #divDrivers input[type=checkbox] {
+        height:20px;
+        width:20px;}
+    </style>
+    
+</apex:component>

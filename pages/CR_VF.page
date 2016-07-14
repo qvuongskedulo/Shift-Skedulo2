@@ -1,0 +1,108 @@
+<apex:page standardController="Condition_Report__c">
+    <head>
+        <apex:includeScript value="{!$Resource.jQuery2}"/>
+        <script>
+        var url = 'https://cors-dot-carlisting-playground.appspot.com/admin/condition_enum';
+
+      $.ajax({
+        type: 'GET',
+        url: url,
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json'
+      }).done(function(data) {
+        console.log(data);
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Failed to validate quote request', jqXHR, textStatus, errorThrown, requestJson);
+      });
+        </script>
+    </head>
+    <apex:sectionHeader title="{!$ObjectType.Condition_Report__c.label}" subtitle="{!Condition_Report__c.name}"/>
+    <apex:pageBlock title="{!$ObjectType.Condition_Report__c.label} Detail">
+        <apex:pageBlockButtons >
+        <apex:form >
+            <apex:commandButton action="{!edit}" value="Edit"/>
+            <apex:commandButton action="{!delete}" value="Delete"/>
+            <apex:commandButton action="{!URLFOR($Action.Condition_Report__c.Clone,Condition_Report__c.id)}" value="Clone"/>
+        </apex:form>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection showHeader="true" title="Basic Information" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Name}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Base_Deal_ID__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Summary__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Car_ID__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Engine" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Engine_Description__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Engine_Additional_Info__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Engine_Definitions__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Brakes &amp; Tires" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Brakes_Tires_Description__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Brakes_Tired_Definitions_to_Include__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Brakes_Tires_Additional_Info__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Tire_Percentage__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Brake_Pads__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Underbody" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Underbody_Description__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Underbody_Definitions_to_Include__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Underbody_Additional_Info__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Road Test" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Road_Test_Description__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Road_Test_Definitions_to_Include__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Road_Test_Additional_Info__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Extra Information" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Additional_Info__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Additoinal_Accidents__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Additional_Service_Records__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Shift_Repairs__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Wear_and_Tear_Shots__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Approvals" columns="2">
+            <apex:outputField value="{!Condition_Report__c.Ready_for_Review__c}"/>
+            <apex:pageBlockSectionItem />
+            <apex:outputField value="{!Condition_Report__c.Approved__c}"/>
+            <apex:pageBlockSectionItem />
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="false" columns="2">
+            <apex:pageBlockSectionItem />
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Condition Report Owner"/>
+                <apex:outputPanel >
+                    <apex:outputField value="{!Condition_Report__c.OwnerId}"/>&nbsp;
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="false" columns="2">
+            <apex:outputField value="{!Condition_Report__c.CreatedById}"/>
+            <apex:outputField value="{!Condition_Report__c.LastModifiedById}"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection showHeader="true" title="Custom Links" columns="3">
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

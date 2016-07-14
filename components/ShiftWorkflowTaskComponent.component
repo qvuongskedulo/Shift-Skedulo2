@@ -1,0 +1,40 @@
+<apex:component controller="ShiftWorkflowTaskComponentController" allowDML="true">
+	<apex:attribute name="renderRelatedTo" default="true" type="Boolean" assignTo="{!attrRenderRelatedTo}" description="Render the related to field"/>
+	<apex:attribute name="allowsCompletion" default="true" type="Boolean" assignTo="{!attrAllowsCompletion}" description="Allow for task completion via the rendered UI"/>
+	<apex:attribute name="beforeComplete" type="ShiftCallable" assignTo="{!attrBeforeComplete}" description="Optional action to invoke before standard completion"/>
+	<apex:form >
+		<apex:pageBlock title="{!taskSubject}">
+			<apex:pageMessages />
+			<apex:pageBlockSection columns="2">
+				<apex:pageBlockSectionItem rendered="{!attrRenderRelatedTo}">
+					<apex:outputLabel value="Related To"/>
+					<apex:outputLink value="{!taskReferenceUrl}">
+						{!taskReferenceLabel}
+					</apex:outputLink>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Task"/>
+					<apex:outputLink value="{!URLFOR($Action.Task.View, taskId)}">
+						{!taskSubject}
+					</apex:outputLink>
+				</apex:pageBlockSectionItem>
+				<apex:outputField value="{!task.Status}"/>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Owner"/>
+					<apex:outputText value="{!taskOwnerName}"/>
+				</apex:pageBlockSectionItem>
+				<apex:outputField value="{!task.Team__c}"/>
+				<apex:outputField value="{!task.Workflow_Identifier__c}"/>
+				<apex:pageBlockSectionItem rendered="{!hasTaskDescription}">
+					<apex:outputLabel value="Description"/>
+					<apex:outputText value="{!taskDescription}"/>
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+			<apex:componentBody />
+			<apex:pageBlockButtons >
+				<apex:commandButton action="{!doComplete}" id="completeButton" value="Complete" disabled="{! !(canComplete && attrAllowsCompletion)}"/>
+				<apex:commandButton action="{!doAbandon}" id="abandonButton" value="Abandon" disabled="{! !canAbandon}"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:component>

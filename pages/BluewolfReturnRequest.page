@@ -1,0 +1,17 @@
+<apex:page showHeader="true" sidebar="true" standardController="Vehicle_Order__c" extensions="BluewolfRequestContExt">
+    <apex:form >
+        <apex:pageBlock title="Submit Return Request">
+            <div>
+                <apex:outputText style="font-size: 10pt; font-weight:bold;" value="Why is the vehicle being returned?"/>
+            </div>
+            <div>
+                <apex:inputField style="height: 150px; width: 70%;" value="{!vehicleOrder.Returned_Notes__c}" required="true"/>
+            </div>
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!createReturnRequest}" value="OK"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

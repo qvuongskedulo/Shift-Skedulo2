@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Canceled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Canceled</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Delivery_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Delivery By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Deliveries1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Departs_At__c</fullName>
+        <externalId>false</externalId>
+        <label>Departs At</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Detailing_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Detailing Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Claimed</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Key Ready, Prep Not Started</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complete</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Can&apos;t Find Key or Car</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>GeoLocation__c</fullName>
+        <displayLocationInDecimal>true</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>GeoLocation</label>
+        <required>false</required>
+        <scale>6</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Notes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Is there anything else that the DOS needs to do? (i.e. Does anyone need to sign the 262 besides the buyer?)</inlineHelpText>
+        <label>Notes</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Original_Time_Requested__c</fullName>
+        <externalId>false</externalId>
+        <label>Original Time Requested</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Payment_Details__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>What should the DOS know about the sale? (i.e. Customer will be paying with First Tech loan and cashier&apos;s check. Customer will have a $5,000 cashier&apos;s check ready. We should be receiving the First Tech check tomorrow.) If redelivery, type &quot;Redelivery&quot;.</inlineHelpText>
+        <label>Payment Details</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Payment_Method__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Please include final sale price, tax and registration and total cost. Also include how the customer is paying for the vehicle. (i.e. First Tech loan of $8,000 and cashier&apos;s check of $5,000 minus Square deposit of $500.) If redelivery, type &quot;Redelivery&quot;.</inlineHelpText>
+        <label>Payment Method</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Scheduled By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Deliveries</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_For__c</fullName>
+        <externalId>false</externalId>
+        <label>Scheduled For</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Thank_You_Note__c</fullName>
+        <externalId>false</externalId>
+        <label>Thank You Note</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Vehicle_Interest__c</fullName>
+        <externalId>false</externalId>
+        <label>Vehicle Interest</label>
+        <referenceTo>Vehicle_Interest__c</referenceTo>
+        <relationshipLabel>Deliveries</relationshipLabel>
+        <relationshipName>Deliveries</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Delivery</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Deliveries_by_last_modified_date</fullName>
+        <columns>NAME</columns>
+        <columns>Scheduled_For__c</columns>
+        <columns>Original_Time_Requested__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <columns>Location__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>Deliveries by last modified date</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <nameField>
+        <displayFormat>{00000}</displayFormat>
+        <label>Delivery Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Deliveries</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>Reschedule</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reschedule</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+var jobResult = sforce.connection.query(&quot;SELECT Id, sked__Job_Status__c FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Delivery__c = &apos;{!Delivery__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length == 0) {
+alert(&apos;This delivery has not been scheduled yet.&apos;);
+}
+else {
+
+var hasCompletedJob = false;
+for (var i = 0; i &lt; jobRecords.length; i++) {
+if (jobRecords[i].sked__Job_Status__c == &apos;Complete&apos; || jobRecords[i].sked__Job_Status__c == &apos;In Progress&apos;) {
+hasCompletedJob = true;
+}
+}
+
+if (hasCompletedJob) {
+alert(&apos;Cannot reschedule complete/in progress jobs.&apos;);
+}
+else {
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Delivery__c.Id}&amp;type=delivery&amp;mode=reschedule &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Schedule_Appointment</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Schedule Appointment</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+
+var jobResult = sforce.connection.query(&quot;SELECT Id FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Evaluation__c = &apos;{!Delivery__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length &gt; 0) {
+    alert(&apos;This delivery has been scheduled and cannot be booked for appointment.&apos;);
+}
+else {
+
+
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Delivery__c.Id}&amp;type=delivery &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+
+}</url>
+    </webLinks>
+</CustomObject>

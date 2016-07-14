@@ -1,0 +1,40 @@
+<apex:page showHeader="false" standardStylesheets="false" docType="html-5.0">
+  <apex:remoteObjects jsNamespace="RemoteObjectModel">
+      <apex:remoteObjectModel name="Vehicle__c"
+        jsShorthand="Vehicle"
+        fields="Id,Make__c,Model__c,Year__c"
+      />
+  </apex:remoteObjects>
+  <html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://fb.me/react-0.14.2.js"></script>
+    <script src="https://fb.me/react-dom-0.14.2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  </head>
+  <body>
+  
+  <h1>Congratulations</h1>
+  This is your new Page: paulshen
+  <div id="example"></div>
+  
+<script type="text/babel">
+var Vehicle = new RemoteObjectModel.Vehicle();
+Vehicle.retrieve({ limit: 5 }, function(err, records, event) {
+var rows = records.map(function(vehicle) {
+    return (
+        <div key={vehicle.get('Id')}>
+            {vehicle.get('Year__c')} {vehicle.get('Make__c')} {vehicle.get('Model__c')}
+        </div>
+    );
+});
+    ReactDOM.render(
+<div>{rows}</div>,
+document.getElementById('example')
+);
+    console.log(err, records, event);
+});
+</script>
+  </body>
+  </html>
+</apex:page>

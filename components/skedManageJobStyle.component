@@ -1,0 +1,86 @@
+<apex:component >
+    
+    <style type="text/css">
+        html, body {
+            overflow: hidden;
+            min-width: auto !important;
+        }
+        .dialog1 {
+        top: 60px!important
+        }
+        
+        .new-appointment {
+        /*min-height: 850px!important;*/
+        position: relative;
+        padding: 0 0 0 265px!important;
+        width: calc(100% - 445px);
+        }
+        
+        .new-appointment .aside {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 265px;
+        padding: 10px !important;
+        border-right: 1px solid #dfe4f2;
+        box-sizing: border-box;
+        -ms-box-sizing: border-box
+        }
+        
+        .new-appointment .calendar-wrapper {
+        height: 100%;
+        width: 100%;
+        padding: 47px 23px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        -ms-box-sizing: border-box
+        }
+        
+        .new-appointment .calendar-header {
+        position: relative
+        }
+        
+        .new-appointment .calendar {
+        padding-top: 24px
+        }
+        
+        #datepickerInput {
+        position: absolute;
+        top: 25px;
+        right: 220px;
+        width: 10px;
+        height: 40px;
+        opacity: 0
+        }
+        
+        .select-person,
+        .select-region {
+        width: 172px;
+        margin-right: 18px;
+        float: left
+        }
+        .new-appointment .aside,
+        .new-appointment .calendar-wrapper {
+            padding: 10px 10px 10px 20px;
+        }
+        
+        .resource-header {
+        position: absolute;
+        z-index: 99;
+        overflow: hidden;
+        height: 52px;
+        white-space: nowrap;
+        }
+        
+        .resource-calendar {
+        margin-top: 25px;
+        }
+        
+        #divDrivers input[type=checkbox] {
+        height:20px;
+        width:20px;}
+    </style>
+    
+</apex:component>

@@ -1,0 +1,286 @@
+<apex:component >
+    
+    <script type="text/javascript">
+    var appointmentsCalendar, jobId, resourceId, objectId, objectType, hasDriverAssist, regionTimezone, eventToReschedule, rescheduleTimeDelta, viewStart, defaultDate;
+    
+    $(function() {
+        appointmentsCalendar = $('#calendar');
+        
+        $('#datepickerInput').datepicker({
+            minDate: viewStart.toDate(),
+            onSelect: function(dateText, inst) {
+                var d;
+                d = new Date(dateText);
+                appointmentsCalendar.fullCalendar('gotoDate', d);
+            }
+        });
+        
+        $('#btnSaveReschedule').click(function() {
+        	saveReschedule();
+        });
+        
+        renderCalendar = function() {
+        	appointmentsCalendar.fullCalendar({
+                customButtons: {
+                    myDatepicker: {
+                        text: 'Calendar',
+                        click: function() {
+                            $('#datepickerInput').datepicker('show');
+                        }
+                    }
+                },
+                header: {
+                    left: '',
+                    center: '',
+                    right: 'prev, title, myDatepicker, next'
+                },
+                height: 500,
+                columnFormat: 'ddd, M/D',
+                defaultDate: defaultDate,
+                weekends: true,
+                defaultView: 'agendaWeek',
+                editable: true,
+                disableResizing: true,
+                allDaySlot: false,
+                snapDuration: '00:30:00',
+                slotDuration: '00:30:00',
+                slotLabelInterval: '00:30:00',
+                slotLabelFormat: 'h:mm a',
+                minTime: '7:00',
+                maxTime: '19:00',
+                scrollTime: '08:00:00',
+                eventOverlap: false,
+                viewRender: function(view, element) {
+                    if (view.start < viewStart) {
+                        $('#calendar .fc-prev-button').hide();
+                        return false;
+                    } else {
+                        $('#calendar .fc-prev-button').show();
+                    }
+                },
+                events: function(start, end, timezone, callback) {
+                    $('#overlay').parent().show();
+                    getEvents(getEpochMillis(start), getEpochMillis(end), jobId, resourceId, regionTimezone, function(result, event) {
+                        $('#overlay').parent().hide();
+                        if (event.type == 'exception') {
+                            alert(event.message);
+                        }
+
+                        if (event.status) {
+                            var filteredList = [];
+                            for (var i = 0; i < result.length; i++) {
+                                result[i].start = result[i].eventStart;
+                                result[i].end = result[i].eventEnd;
+                                filteredList.push(result[i]);
+                            }
+                            mergeEvents(filteredList);
+                            callback(filteredList);
+                        }
+                    }); 
+                },
+                eventClick: function(calEvent, jsEvent, view) {
+                    
+                },
+                dayClick: function(slotTime, jsEvent, view) {
+                    var delta = slotTime.diff(eventToReschedule.start);//miliseconds
+                    rescheduleTimeDelta = delta;
+                    rescheduleJobEvent(delta)
+                },
+                eventDrop: function(event, delta, revertFunc, jsEvent, ui, view) {
+                    rescheduleTimeDelta = delta;
+                    if (!rescheduleJobEvent(delta)) {
+                    	revertFunc();
+                    }
+                },
+                eventResize: function(event, delta, revertFunc) {
+                    revertFunc();
+                },
+                eventRender: function(event, element) {
+                    var p = $('<p>');
+                    p.html(event.description);
+                    p.html(p.text());
+                    element.find('.fc-title').after(p);
+                    if (event.id == jobId) {
+                        eventToReschedule = event;
+                    }
+                },
+                eventAfterAllRender: function() {
+                    
+                }
+            });
+        }
+        
+        initializeBookingDialog();
+        
+        return renderCalendar();
+    });
+    
+    function initializeBookingDialog() {
+        $('#jobDialog').dialog({
+            autoOpen: false,
+            title: 'Confirm Booking',
+            resizable: false,
+            width: 750,
+            height: 'auto',
+            autoResize: true,
+            modal: true,
+            draggable: true,
+            buttons: [
+                {
+                    text: 'Save Booking',
+                    click: saveBooking
+                }
+            ],
+            create:function () {
+                $(this).closest(".ui-dialog")
+                .find(".ui-dialog-buttonset button")
+                .addClass("ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only");
+            }
+        });
+    }
+    
+    function saveBooking() {
+        var driverAssistId = '';
+        if (hasDriverAssist) {
+            driverAssistId = $('#divDrivers').find('input[type=checkbox]:checked').val();
+            if (driverAssistId == undefined || driverAssistId == '') {
+                alert('Please select driver assist.');
+                return;
+            }
+        }
+        
+        $('#overlay').parent().show();
+        rescheduleEvent(eventToReschedule.id, '' + rescheduleTimeDelta, 'drop', objectId, objectType, driverAssistId, function(result, event) {
+            if (event.type == 'exception') {
+                alert(event.message);
+            }
+            if (event.status) {
+                $('#jobDialog').dialog('close');
+                reloadEvents();
+            }
+        });
+    }
+    
+    function rescheduleJobEvent(delta) {
+        var newJobStartIncludeTravel = eventToReschedule.startIncludingTravel + delta;
+        var newJobEndIncludeTravel = eventToReschedule.endIncludingTravel + delta;
+        
+        var jobEvents = appointmentsCalendar.fullCalendar('clientEvents', function(event) { return event.id && event.id.length == 15 });
+        var canReschedule = true;
+        $(jobEvents).each(function(i) {
+            var jobEvent = jobEvents[i];
+            if (jobEvent.id != eventToReschedule.id) {
+                if ((newJobStartIncludeTravel > jobEvent.startIncludingTravel && newJobStartIncludeTravel < jobEvent.endIncludingTravel) ||
+                    (newJobEndIncludeTravel > jobEvent.startIncludingTravel && newJobEndIncludeTravel < jobEvent.endIncludingTravel)) {
+                    canReschedule = false;
+                    alert('The reschedule time conflicks with ' + jobEvent.title);
+                }
+            }
+        });
+        if (canReschedule) {
+            var availabilitiEvents = appointmentsCalendar.fullCalendar('clientEvents', function(event) { return event.description == 'Uneditable_Time' || event.description == 'Non_working_time' });
+            $(availabilitiEvents).each(function(i) {
+                var availabilitiEvent = availabilitiEvents[i];
+                if ((newJobStartIncludeTravel > availabilitiEvent.eventStart && newJobStartIncludeTravel < availabilitiEvent.eventEnd) ||
+                    (newJobEndIncludeTravel > availabilitiEvent.eventStart && newJobEndIncludeTravel < availabilitiEvent.eventEnd)) {
+                    canReschedule = false;
+                    alert('The reschedule time conflicks with the availability of resource.');
+                }
+            });
+        }
+        if (canReschedule) {
+            if (hasDriverAssist) {
+                $('#overlay').parent().show();
+                getDriversAssist(jobId, delta, function(result, event) {
+                    $('#overlay').parent().hide();
+                    if (event.type == 'exception') {
+                        alert(event.message);
+                    }
+                    if (event.status) {
+                        renderDriversAssist(result);
+                        $('#divDriversAssist').show();
+                        $('#jobDialog').dialog('open');
+                    }
+                });
+            }
+            else {
+                $('#overlay').parent().show();
+                rescheduleEvent(eventToReschedule.id, '' + delta, 'drop', objectId, objectType, '', function(result, event) {
+                    if (event.type == 'exception') {
+                        alert(event.message);
+                    }
+                    if (event.status) {
+                        reloadEvents();
+                    }
+                });
+            }
+        }
+        return canReschedule;
+    }
+    
+    function renderDriversAssist(driversData) {
+        $('#divDrivers').html('');
+        if (driversData.length == 0) {
+        	$('#divDrivers').text('There is no available driver assist on the booking time.');
+        }
+        for (var i = 0; i < driversData.length; i++) {
+            var driver = driversData[i];
+            var $row = $('<div class="row">');
+            var $checkbox = $('<input type="checkbox" />');
+            $checkbox.val(driver.Value);
+            $checkbox.change(function () {
+                $('#divDrivers').find('input[type=checkbox]').not(this).prop('checked', false); 
+            });
+            var $label = $('<span>');
+            $label.text(driver.Text);
+            $row.append($checkbox);
+            $row.append($label);
+            $('#divDrivers').append($row);
+        }
+    }
+    
+    function mergeEvents(filteredList) {
+        var currentEvent = filteredList[0];
+        for (var i = 1; i < filteredList.length; i++) {
+            var nextEvent = filteredList[i];
+            if (typeof(currentEvent.rendering) == 'undefined' || currentEvent.rendering != 'background' 
+                || currentEvent.description == 'travel_after' || currentEvent.description == 'travel_before') {
+                currentEvent = nextEvent;
+                continue;
+            }
+            if (typeof(nextEvent.rendering) == 'undefined' || nextEvent.rendering != 'background'
+                || currentEvent.description == 'travel_after' || currentEvent.description == 'travel_before') {
+                continue;
+            }
+            
+            if (currentEvent.end <= nextEvent.start) {
+                currentEvent = nextEvent;
+                continue;
+            }
+            else {
+                if (nextEvent.end <= currentEvent.end) {
+                    nextEvent.end = nextEvent.start;
+                }
+                else {
+                    nextEvent.start = currentEvent.end;
+                    currentEvent = nextEvent;
+                }
+            }
+        }
+        for (var i = filteredList.length - 1; i >= 0; i--) {
+            if (filteredList[i].start == filteredList[i].end) {
+                filteredList.splice(i, 1);
+            }
+        }
+    }
+    
+    function reloadEvents() {
+        appointmentsCalendar.fullCalendar('refetchEvents');
+    }
+    
+    function getEpochMillis(dateStr) {
+        return new Date(dateStr).getTime()/1000;
+    }
+    </script>
+    
+</apex:component>

@@ -1,0 +1,101 @@
+<apex:page docType="html-5.0" title="Processing Task" controller="ShiftProcessingTaskController">
+	<c:ShiftWorkflowTaskComponent renderRelatedTo="false" allowsCompletion="{!allowsCompletion}" beforeComplete="{!beforeComplete}">
+		<apex:pageBlockSection columns="2">
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Seller Opportunity"/>
+				<apex:outputLink value="{!URLFOR($Action.Opportunity.View, sellerOpportunityId)}">
+					{!sellerOpportunityName}
+				</apex:outputLink>
+			</apex:pageBlockSectionItem>
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Vehicle"/>
+				<apex:outputLink value="{!URLFOR($Action.Vehicle__c.View, vehicleId)}">
+					{!vehicleName}
+				</apex:outputLink>
+			</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+		<apex:pageBlockSection rendered="{!isAssessRepairs}" columns="1">
+			<hr/>
+			Either mark this vehicle as going direct to wholesale, or select an
+			option for each of the repair types:
+			<!-- 
+				(jonathan@) Because a Processing_Pipeline__c is readonly for
+				props users, simply putting an apex:inputField here for the
+				checkbox does not display as an editable checkbox, so we set
+				our own property in the controller and then set the field value
+				internally there.
+			-->
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Direct to Wholesale"/>
+				<apex:inputCheckbox value="{!isDirectToWholesale}"/>
+			</apex:pageBlockSectionItem>
+			<apex:repeat value="{!repairStatuses}" var="status">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="{!status.label}"/>
+					<apex:selectList size="1" value="{!status.currentValue}">
+						<apex:selectOptions value="{!status.selectOptions}"/>
+					</apex:selectList>
+				</apex:pageBlockSectionItem>
+			</apex:repeat>
+		</apex:pageBlockSection>
+		<apex:pageBlockSection rendered="{!hasInspection}">
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Action"/>
+				<apex:outputLink target="_blank" value="{!inspectionUrl}">
+					Go To Inspection
+				</apex:outputLink>
+			</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+		<apex:pageBlockSection rendered="{!isGetSellerApproval}">
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value="Next Step"/>
+				<apex:selectRadio value="{!sellerApprovalNextStep}">
+					<apex:selectOptions value="{!sellerApprovalNextSteps}"/>
+				</apex:selectRadio>
+			</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+		<apex:outputPanel rendered="{!isTopFeatures}">
+			<apex:pageBlockSection columns="1" title="Current Options" rendered="{!hasVehicleOptionsItems}">
+				<apex:pageBlockTable value="{!vehicleOptionsItems}" var="item">
+					<apex:column value="{!item.Name}"/>
+					<apex:column value="{!item.Description__c}"/>
+				</apex:pageBlockTable>
+			</apex:pageBlockSection>
+			<apex:pageBlockSection title="Add Option" columns="1">
+				<apex:inputField value="{!vehicleOptionsItem.Name}"/>
+				<apex:inputField value="{!vehicleOptionsItem.Description__c}"/>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel />
+					<apex:commandButton action="{!doAddOptionsItem}" value="Add"/>
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+		</apex:outputPanel>
+		<apex:outputPanel rendered="{!isPhotographVehicle}">
+			<apex:pageBlockSection >
+				<apex:inputField value="{!vehicle.Dropbox_Photos_URL__c}"/>
+			</apex:pageBlockSection>
+		</apex:outputPanel>
+		<apex:outputPanel rendered="{!isWriteListing}">
+			<apex:pageBlockSection >
+				<apex:inputField value="{!vehicle.Listing_Title__c}"/>
+				<apex:inputField value="{!vehicle.Listing_Text__c}"/>
+				<apex:outputField value="{!vehicle.Craigslist_Top_Features__c}"/>
+			</apex:pageBlockSection>
+		</apex:outputPanel>
+		<apex:outputPanel >
+			<apex:pageBlockSection title="Processing Notes" columns="1">
+				<apex:pageBlockTable value="{!processingNotes}" var="note" rendered="{!hasProcessingNotes}">
+					<apex:column value="{!note.Content__c}"/>
+					<apex:column headerValue="Created By" value="{!note.CreatedBy.Name}"/>
+					<apex:column value="{!note.CreatedDate}"/>
+				</apex:pageBlockTable>
+			</apex:pageBlockSection>
+			<apex:pageBlockSection columns="2">
+				<apex:inputTextArea cols="160" rows="10" value="{!processingNoteToAdd.Content__c}"/>
+				<apex:pageBlockSectionItem >
+					<apex:commandButton action="{!doAddProcessingNote}" value="Add"/>
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+		</apex:outputPanel>
+	</c:ShiftWorkflowTaskComponent>
+</apex:page>

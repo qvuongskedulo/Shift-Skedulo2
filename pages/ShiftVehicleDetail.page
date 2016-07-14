@@ -1,0 +1,89 @@
+<apex:page docType="html-5.0" title="Vehicle Detail" controller="ShiftVehicleDetailController">
+	<script>
+		function toggleDisplayBlocks(ids) {
+			for (var i = 0; i < ids.length; i++) {
+				var e = document.getElementById(ids[i]);
+				if (e.style.display == 'block') {
+					e.style.display = 'none';
+				} else {
+					e.style.display = 'block';
+				}
+			}
+		}
+	</script>
+	<apex:pageMessages />
+	<apex:pageBlock mode="maindetail" tabStyle="Contact">
+		<apex:detail subject="{!sellerContact.Id}" relatedList="false" title="false"/>
+	</apex:pageBlock>
+	<apex:pageBlock mode="maindetail" tabStyle="Vehicle__c">
+		<apex:detail subject="{!vehicle.Id}" relatedList="false" title="false"/>
+	</apex:pageBlock>
+	<apex:pageBlock mode="maindetail" tabStyle="Opportunity">
+		<apex:detail subject="{!sellerOpportunity.Id}" relatedList="false"	title="false"/>
+	</apex:pageBlock>
+	<apex:pageBlock rendered="{!vehicleOrdersSize == 1}" mode="maindetail" tabStyle="Vehicle_Order__c">
+		<apex:detail subject="{!vehicleOrder.Id}" relatedList="false" title="false"/>
+	</apex:pageBlock>
+	<apex:relatedList subject="{!sellerOpportunity.Id}" list="Evaluations__r"/>
+	<apex:pageBlock title="Opportunity Notes">
+		<apex:pageBlockTable value="{!opportunityNoteDisplays}" var="display" rendered="{!hasOpportunityNotes}">
+			<apex:column >
+				<apex:outputLink target="_blank" value="{!URLFOR($Action.Opportunity_Note__c.View, display.note.Id)}">
+					View
+				</apex:outputLink>
+			</apex:column>
+			<apex:column >
+				<!-- note is smaller than truncate threshold, no need for truncation or js more/less functionality -->
+				<apex:outputPanel id="full-container" layout="block" rendered="{! !display.hasToggle}">
+					<apex:outputText value="{!display.fullContent}" escape="false" />
+				</apex:outputPanel>
+				<!-- note is longer than truncate threshold, need truncation and js more/less functionality -->
+				<apex:outputPanel id="toggle-container" layout="block" rendered="{!display.hasToggle}">
+					<apex:outputPanel id="truncated" layout="block" style="display:block">
+						<apex:outputText value="{!display.truncatedContent}" escape="false" />
+						<br/>
+						<apex:outputLink onclick="toggleDisplayBlocks(['{!$Component.full}', '{!$Component.truncated}']); return false;">
+							More...
+						</apex:outputLink>
+					</apex:outputPanel>
+					<apex:outputPanel id="full" layout="block" style="display:none">
+						<apex:outputText value="{!display.fullContent}" escape="false"/>
+						<br/>
+						<apex:outputLink onclick="toggleDisplayBlocks(['{!$Component.full}', '{!$Component.truncated}']); return false;">
+							Less...
+						</apex:outputLink>
+					</apex:outputPanel>
+				</apex:outputPanel>
+			</apex:column>
+			<apex:column value="{!display.note.Call_Outcome__c}"/>
+			<apex:column value="{!display.note.CreatedById}"/>
+			<apex:column value="{!display.note.CreatedDate}"/>
+		</apex:pageBlockTable>
+		<apex:outputText value="No records to display" rendered="{! !hasOpportunityNotes}"/>
+	</apex:pageBlock>	
+	<apex:relatedList subject="{!sellerOpportunity.Id}" list="Shift_Stage_Changes__r"/>
+	<apex:relatedList subject="{!sellerOpportunity.Id}" list="Craigslist_Sources__r"/>
+	<apex:relatedList subject="{!vehicle.Id}" list="Vehicle_Interests__r"/>
+	<apex:relatedList subject="{!vehicle.Id}" list="Vehicle_Orders__r"/>
+	<apex:pageBlock title="Inspections">
+		<apex:pageBlockTable value="{!inspectionUrls}" var="inspectionUrl" rendered="{!hasInspections}">
+			<apex:column headerValue="Inspection Name">
+				<apex:outputLink value="{!inspectionUrl}">Go To Inspection</apex:outputLink>
+			</apex:column>
+		</apex:pageBlockTable>
+		<apex:outputText value="No records to display" rendered="{! !hasInspections}"/>
+	</apex:pageBlock>
+	<apex:pageBlock title="Attachments">
+		<apex:pageBlockTable value="{!attachments}" var="attachment" rendered="{!hasAttachments}">
+			<apex:column value="{!attachment.Id}"/>
+			<apex:column headerValue="Title">
+				<apex:outputLink target="_blank" value="{!URLFOR($Action.Attachment.Download, attachment.Id)}">
+					{!attachment.Name}
+				</apex:outputLink>
+			</apex:column>
+			<apex:column value="{!attachment.LastModifiedDate}"/>
+			<apex:column value="{!attachment.CreatedById}"/>
+		</apex:pageBlockTable>
+		<apex:outputText value="No records to display" rendered="{! !hasAttachments}"/>
+	</apex:pageBlock>
+</apex:page>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Shift_UQ_Profile_ID_Attribute_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>The unique key for Staff Profile Attribute Associations.  It&apos;s set in a beforeInsert/Update trigger to &lt;StaffProfileId&gt;:&lt;StaffProfileAttributeId&gt;.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The unique key for Staff Profile Attribute Associations.  It&apos;s set in a beforeInsert/Update trigger to &lt;StaffProfileId&gt;:&lt;StaffProfileAttributeId&gt;.</inlineHelpText>
+        <label>Shift UQ Profile_ID Attribute_ID</label>
+        <length>37</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Skedulo_Resource_Tag_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Skedulo Resource Tag</label>
+        <referenceTo>sked__Resource_Tag__c</referenceTo>
+        <relationshipLabel>Staff Profile Attribute Associations</relationshipLabel>
+        <relationshipName>Staff_Profile_Attribute_Associations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Staff_Profile_Attribute_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Staff Profile Attribute</label>
+        <referenceTo>Staff_Profile_Attribute__c</referenceTo>
+        <relationshipLabel>Staff Profile Attribute Associations</relationshipLabel>
+        <relationshipName>Staff_Profile_Attribute_Associations</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Staff_Profile_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Staff Profile</label>
+        <referenceTo>Staff_Profile__c</referenceTo>
+        <relationshipLabel>Staff Profile Attribute Associations</relationshipLabel>
+        <relationshipName>Staff_Profile_Attribute_Associations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Staff Profile Attribute Association</label>
+    <nameField>
+        <label>Staff Profile Attribute Association Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Staff Profile Attribute Associations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+</CustomObject>

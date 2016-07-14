@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Activated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Activated</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Buyer_Opportunity_CC_List__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This contains a list of email, separated by ;</inlineHelpText>
+        <label>Buyer Opportunity CC List</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Customer_Experience_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Customer Experience Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Inside_Sales_Inbound_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Inside Sales - Inbound Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Last_Job_Rule_Minutes__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Job Rule Minutes</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seller_Opportunity_CC_List__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This contains a list of email, separated by ;</inlineHelpText>
+        <label>Seller Opportunity CC List</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Travel_Time_Buffer__c</fullName>
+        <description>Number of buffer minutes for test drives and deliveries</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For test drives and deliveries only</inlineHelpText>
+        <label>Travel Time Buffer</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Skedulo Booking Email Setting</label>
+</CustomObject>

@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Represents an evaluation of a seller vehicle.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Base_Evaluated_By__c</fullName>
+        <description>Base UserID for this (migrated) evaluation</description>
+        <externalId>false</externalId>
+        <label>Base Evaluated By</label>
+        <length>19</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Base_Scheduled_By__c</fullName>
+        <description>Base UserID of user who scheduled this (migrated) Evaluation.</description>
+        <externalId>false</externalId>
+        <label>Base Scheduled By</label>
+        <length>19</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Booked_Through__c</fullName>
+        <externalId>false</externalId>
+        <label>Booked Through</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Automated pickup from queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email from queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Call into queue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outbound phone call</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Outbound email campaign</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Canceled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Canceled</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Evaluated_At_Date_Time__c</fullName>
+        <externalId>false</externalId>
+        <formula>Evaluated_At__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Evaluated At (Date/Time)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Evaluated_At__c</fullName>
+        <externalId>false</externalId>
+        <label>Evaluated At</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Evaluated_By_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Evaluated By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Evaluation_By_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Evaluated_By_ID__r.FirstName &amp; &quot; &quot; &amp; Evaluated_By_ID__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Evaluation By Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Evaluation_Survey__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Evaluation Survey</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Shift_Survey__c.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Evaluation</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Shift_Survey__c</referenceTo>
+        <relationshipLabel>Evaluations</relationshipLabel>
+        <relationshipName>Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GeoLocation__c</fullName>
+        <displayLocationInDecimal>false</displayLocationInDecimal>
+        <externalId>false</externalId>
+        <label>GeoLocation</label>
+        <required>false</required>
+        <scale>7</scale>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Location</type>
+    </fields>
+    <fields>
+        <fullName>Inside_Sales_Calendar_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Inside Sales Calendar Notes</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Location__c</fullName>
+        <externalId>false</externalId>
+        <label>Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_At__c</fullName>
+        <description>Time at which this object was migrated</description>
+        <externalId>false</externalId>
+        <label>Migrated At</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Migration_Source_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Base object from which this object was migrated.</description>
+        <externalId>false</externalId>
+        <label>Migration Source ID</label>
+        <referenceTo>Migration_Source__c</referenceTo>
+        <relationshipLabel>Evaluations</relationshipLabel>
+        <relationshipName>Evaluations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Migration_Tree_ID__c</fullName>
+        <caseSensitive>true</caseSensitive>
+        <externalId>true</externalId>
+        <label>Migration Tree ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Next_Steps_After_Evaluation__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>- How did the evaluation go?
+- Are there any outstanding questions and issues?
+- What are the next steps? By who? When?</inlineHelpText>
+        <label>Next Steps After Evaluation</label>
+        <length>10000</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>On_The_Spot_Pickup__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox should be checked only if the vehicle was picked up during the eval.  (Waves the Pick-Up Fee.)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox should be checked only if the vehicle was picked up during the eval.  (Waves the Pick-Up Fee.)</inlineHelpText>
+        <label>On The Spot Pickup</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Originally_Requested_At__c</fullName>
+        <externalId>false</externalId>
+        <label>Originally Requested At</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Pickup_Probability__c</fullName>
+        <externalId>false</externalId>
+        <label>Pickup Probability</label>
+        <picklist>
+            <picklistValues>
+                <fullName>0%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>25%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>50%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>75%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>100%</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Seller_Opportunity_ID__r.Region_ID__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By_ID__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Scheduled By</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Evaluations1</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Scheduled_By_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Scheduled_By_ID__r.FirstName &amp; &quot; &quot; &amp;  Scheduled_By_ID__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scheduled By Text</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seller_Drop_Off__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This checkbox should be checked if the vehicle is dropped off by the customer at the hub.  (Waives the Pick Up Fee.)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This checkbox should be checked if the vehicle is dropped off by the customer at the hub.  (Waives the Pick Up Fee.)</inlineHelpText>
+        <label>Seller Drop-Off</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Seller_Opportunity_ID__c</fullName>
+        <externalId>false</externalId>
+        <label>Seller Opportunity ID</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Value is not a Seller Opportunity</errorMessage>
+            <filterItems>
+                <field>Opportunity.RecordType.DeveloperName</field>
+                <operation>equals</operation>
+                <value>Seller</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>Evaluations</relationshipLabel>
+        <relationshipName>Evaluations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <label>Evaluation</label>
+    <nameField>
+        <displayFormat>{0}</displayFormat>
+        <label>Evaluation Name</label>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Evaluations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <webLinks>
+        <fullName>Reschedule</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Reschedule</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+var jobResult = sforce.connection.query(&quot;SELECT Id, sked__Job_Status__c FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Evaluation__c = &apos;{!Evaluation__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length == 0) {
+alert(&apos;This evaluation has not been scheduled yet.&apos;);
+}
+else {
+
+var hasCompletedJob = false;
+for (var i = 0; i &lt; jobRecords.length; i++) {
+if (jobRecords[i].sked__Job_Status__c == &apos;Complete&apos; || jobRecords[i].sked__Job_Status__c == &apos;In Progress&apos;) {
+hasCompletedJob = true;
+}
+}
+
+if (hasCompletedJob) {
+alert(&apos;Cannot reschedule complete/in progress jobs.&apos;);
+}
+else {
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Evaluation__c.Id}&amp;type=evaluation&amp;mode=reschedule &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Schedule_Appointment</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Schedule Appointment</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&apos;/soap/ajax/29.0/connection.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/js/functions.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/js/jquery-1.8.2.min.js&apos;)} 
+{!REQUIRESCRIPT(&apos;/resource/skedScripts/ui/jquery-ui.min.js&apos;)}  
+
+requireCssFile(&apos;/resource/skedScripts/ui/jquery-ui.css&apos;); 
+requireCssFile(&apos;/resource/skedScripts/ui/dialog.min.css&apos;);
+
+function requireCssFile(filename) { 
+var fileref = document.createElement(&apos;link&apos;); 
+fileref.setAttribute(&apos;rel&apos;, &apos;stylesheet&apos;); 
+fileref.setAttribute(&apos;type&apos;, &apos;text/css&apos;); 
+fileref.setAttribute(&apos;href&apos;, filename); 
+document.getElementsByTagName(&apos;head&apos;)[0].appendChild(fileref); 
+} 
+
+if ({!Evaluation__c.Canceled__c}) {
+    alert(&apos;This evaluation has been canceled and cannot be booked for appointment.&apos;);
+}
+else {
+
+var jobResult = sforce.connection.query(&quot;SELECT Id FROM sked__Job__c WHERE sked__job_status__c != &apos;Cancelled&apos; AND Evaluation__c = &apos;{!Evaluation__c.Id}&apos;&quot;);
+var jobRecords = jobResult.getArray(&quot;records&quot;);
+
+if (jobRecords.length &gt; 0) {
+    alert(&apos;This evaluation has been scheduled and cannot be booked for appointment.&apos;);
+}
+else {
+
+
+var j$ = jQuery.noConflict();
+var dialog_width = j$(window).width() - 64;
+var dialog_height = j$(window).height() - 64;
+var count = 1;
+var iframe_url = &apos;{!URLFOR(&apos;/apex/skedBookingGrid&apos;)}&apos;; 
+var child_domain = iframe_url.substring(0, iframe_url.indexOf(&apos;/&apos;, 9)); 
+var parent_domain = window.location.protocol + &apos;//&apos; + window.location.host; 
+var j$modalDialog = j$(&apos;&lt;div&gt;&lt;/div&gt;&apos;) 
+.html(&apos;&lt;iframe id=&quot;iframeContentId&quot; src=&quot;&apos; + iframe_url + &apos;?parent_domain=&apos; + parent_domain + &apos;&amp;id={!Evaluation__c.Id}&amp;type=evaluation &quot; frameborder=&quot;0&quot; height=&quot;100%&quot; width=&quot;100%&quot; marginheight=&quot;0&quot; marginwidth=&quot;0&quot; scrolling=&quot;true&quot; /&gt;&apos;) 
+.dialog({
+    autoOpen: false,
+    title: &apos;Create New Photography Appointment&apos;,
+    resizable: false,
+    width: dialog_width,
+    height: dialog_height,
+    autoResize: true,
+    modal: true,
+    draggable: true,
+    dialogClass: &apos;dialog1&apos;
+  });
+
+j$modalDialog.dialog(&apos;open&apos;);
+
+}
+
+}</url>
+    </webLinks>
+</CustomObject>
